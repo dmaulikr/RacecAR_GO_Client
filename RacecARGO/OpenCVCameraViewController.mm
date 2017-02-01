@@ -14,6 +14,9 @@
 
 #import "OpenCVCameraViewController.h"
 
+#import "VMMRecognizer.h"
+#import "NumberPlateExtractor.h"        // just for testing
+
 
 @interface OpenCVCameraViewController () <CvVideoCameraDelegate> {
     CvVideoCamera* videoCamera;
@@ -49,7 +52,14 @@
 
 #ifdef __cplusplus
 - (void)processImage:(cv::Mat&)image {
-    cv::cvtColor(image, image, CV_BGR2GRAY);
+    cv::cvtColor((const cv::_InputArray)image, (const cv::_OutputArray)image, CV_BGR2GRAY);
+    
+    //VMMRecognizer recognize       // TODO later
+    
+    // TEST: number plate extraction
+    cv::Rect numberPlateRect = [NumberPlateExtractor extract:image];
+    cv::Scalar color(0, 0, 0);
+    cv::rectangle(image, numberPlateRect, color);
 }
 #endif
 
