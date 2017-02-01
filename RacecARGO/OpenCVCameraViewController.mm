@@ -49,7 +49,7 @@
 
 #ifdef __cplusplus
 - (void)processImage:(cv::Mat&)image {
-    //cv::cvtColor(image, image, CV_BGR2GRAY);
+    cv::cvtColor(image, image, CV_BGR2GRAY);
 }
 #endif
 
