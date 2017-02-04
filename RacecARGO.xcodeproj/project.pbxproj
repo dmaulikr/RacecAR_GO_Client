@@ -13,6 +13,8 @@
 		8F42E5EC1E45072000A4B98C /* RoIExtractor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F42E5EB1E45072000A4B98C /* RoIExtractor.mm */; };
 		8F42E5EF1E451E6B00A4B98C /* FeatureExtractor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F42E5EE1E451E6B00A4B98C /* FeatureExtractor.mm */; };
 		8F49ABA11E462CA3008822A2 /* ImageUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F49ABA01E462CA3008822A2 /* ImageUtils.mm */; };
+		8F49ABAA1E466162008822A2 /* TCPSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F49ABA91E466162008822A2 /* TCPSocket.m */; };
+		8F49ABAD1E466568008822A2 /* TCPSocketRequester.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F49ABAC1E466568008822A2 /* TCPSocketRequester.m */; };
 		8F5B0C6C1E420D8B0067073A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5B0C6B1E420D8B0067073A /* AppDelegate.swift */; };
 		8F5B0C6E1E420D8B0067073A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5B0C6D1E420D8B0067073A /* ViewController.swift */; };
 		8F5B0C711E420D8B0067073A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F5B0C6F1E420D8B0067073A /* Main.storyboard */; };
@@ -45,6 +47,10 @@
 		8F42E5EE1E451E6B00A4B98C /* FeatureExtractor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FeatureExtractor.mm; sourceTree = "<group>"; };
 		8F49AB9F1E462CA3008822A2 /* ImageUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUtils.h; sourceTree = "<group>"; };
 		8F49ABA01E462CA3008822A2 /* ImageUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageUtils.mm; sourceTree = "<group>"; };
+		8F49ABA81E466162008822A2 /* TCPSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPSocket.h; sourceTree = "<group>"; };
+		8F49ABA91E466162008822A2 /* TCPSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPSocket.m; sourceTree = "<group>"; };
+		8F49ABAB1E466568008822A2 /* TCPSocketRequester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPSocketRequester.h; sourceTree = "<group>"; };
+		8F49ABAC1E466568008822A2 /* TCPSocketRequester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPSocketRequester.m; sourceTree = "<group>"; };
 		8F5B0C681E420D8B0067073A /* RacecARGO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RacecARGO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F5B0C6B1E420D8B0067073A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8F5B0C6D1E420D8B0067073A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +110,27 @@
 			name = VMMR;
 			sourceTree = "<group>";
 		};
+		8F49ABA21E464DDA008822A2 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				8F2A0C9B1E427CCA009FFD0D /* Const.h */,
+				8F49AB9F1E462CA3008822A2 /* ImageUtils.h */,
+				8F49ABA01E462CA3008822A2 /* ImageUtils.mm */,
+			);
+			name = util;
+			sourceTree = "<group>";
+		};
+		8F49ABA51E464E3D008822A2 /* net */ = {
+			isa = PBXGroup;
+			children = (
+				8F49ABA81E466162008822A2 /* TCPSocket.h */,
+				8F49ABA91E466162008822A2 /* TCPSocket.m */,
+				8F49ABAB1E466568008822A2 /* TCPSocketRequester.h */,
+				8F49ABAC1E466568008822A2 /* TCPSocketRequester.m */,
+			);
+			name = net;
+			sourceTree = "<group>";
+		};
 		8F5B0C5F1E420D8B0067073A = {
 			isa = PBXGroup;
 			children = (
@@ -137,9 +164,8 @@
 				8F5B0C771E420D8B0067073A /* Info.plist */,
 				8F5B0C871E421F6D0067073A /* OpenCVCameraViewController.h */,
 				8F5B0C881E421F6D0067073A /* OpenCVCameraViewController.mm */,
-				8F2A0C9B1E427CCA009FFD0D /* Const.h */,
-				8F49AB9F1E462CA3008822A2 /* ImageUtils.h */,
-				8F49ABA01E462CA3008822A2 /* ImageUtils.mm */,
+				8F49ABA21E464DDA008822A2 /* util */,
+				8F49ABA51E464E3D008822A2 /* net */,
 			);
 			path = RacecARGO;
 			sourceTree = "<group>";
@@ -240,6 +266,8 @@
 				8F49ABA11E462CA3008822A2 /* ImageUtils.mm in Sources */,
 				8F5B0C6E1E420D8B0067073A /* ViewController.swift in Sources */,
 				8F5B0C6C1E420D8B0067073A /* AppDelegate.swift in Sources */,
+				8F49ABAD1E466568008822A2 /* TCPSocketRequester.m in Sources */,
+				8F49ABAA1E466162008822A2 /* TCPSocket.m in Sources */,
 				8F42E5EF1E451E6B00A4B98C /* FeatureExtractor.mm in Sources */,
 				8F5B0C891E421F6D0067073A /* OpenCVCameraViewController.mm in Sources */,
 				8F5B0C821E420DE40067073A /* OpenCVWrapper.mm in Sources */,

@@ -11,8 +11,24 @@
 #import "FeatureExtractor.h"
 #import "ImageUtils.h"
 #import "Const.h"
+#import "TCPSocketRequester.h"
+
+
+@interface VMMRecognizer () {
+    TCPSocketRequester* socketRequester;
+}
+@end
+
 
 @implementation VMMRecognizer
+
+- (id)init {
+    if (self = [super init]) {
+        self->socketRequester = [[TCPSocketRequester alloc] init];
+    }
+    return self;
+}
+
 
 - (void)recognize:(cv::Mat&)vehicleImage withNumberPlateRect:(cv::Rect&)rect {
     // extract RoI
