@@ -6,3 +6,4 @@
 //  Copyright © 2017 Johannes Heucher. All rights reserved.
 //
 
+#define ROI_WIDTH 400

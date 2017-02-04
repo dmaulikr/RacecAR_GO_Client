@@ -9,6 +9,8 @@
 #import "VMMRecognizer.h"
 #import "RoIExtractor.h"
 #import "FeatureExtractor.h"
+#import "ImageUtils.h"
+#import "Const.h"
 
 @implementation VMMRecognizer
 
@@ -16,8 +18,13 @@
     // extract RoI
     cv::Mat roI = [RoIExtractor extractFromSource:vehicleImage withNumberPlateRect:rect];
     
-TODO: Check that RoI has exactly the same size as the training images. Otherwise,
-    the extracted descriptors will differ in amount and style.
+    // normalize RoI
+    cv::equalizeHist(roI, roI);
+    [ImageUtils resize:roI to:roI withWidth:ROI_WIDTH];
+    
+    
+    // TODO: Make a test: Compute descriptors for the same image with JAVA and
+    // iOS app. #descriptors should be the same.
     
     // extract feature descriptors
     cv::Mat descriptors;

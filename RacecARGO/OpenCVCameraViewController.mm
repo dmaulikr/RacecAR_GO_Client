@@ -36,7 +36,7 @@
     
     self.videoCamera = [[CvVideoCamera alloc] initWithParentView:imageView];
     self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionBack;
-    self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset352x288;
+    self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset1280x720;
     self.videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
     self.videoCamera.defaultFPS = 30;
     self.videoCamera.grayscaleMode = NO;
@@ -56,27 +56,33 @@
 #ifdef __cplusplus
 - (void)processImage:(cv::Mat&)image {
     cv::Mat grayImage;
-    cv::cvtColor(image, grayImage, CV_BGR2GRAY);
     
-    // write and read
-    std::vector<uchar> array;
-    if (grayImage.isContinuous()) {
-        array.assign(grayImage.datastart, grayImage.dataend);
-    }
-    for (int i = 100 * image.cols; i < 140 * image.cols; i++) {
-        array[i] = 0;
-    }
-    cv::Mat loadedImage = cv::Mat(image.rows, image.cols, CV_8UC1);
-    memcpy(loadedImage.data, array.data(), array.size() * sizeof(uchar));
+    // crop to fit image view
+    int width  = (int)self->imageView.bounds.size.width * 2;
+    int height = (int)self->imageView.bounds.size.height * 2;
+    cv::Mat cropped = image(cv::Rect(0, 0, width, height));
+    cv::cvtColor(cropped, image, CV_BGR2RGB);
+    
+    // turn to gray for VMMR
+    cv::cvtColor(cropped, grayImage, CV_BGR2GRAY);
     
     
-    cv::Rect numberPlateRect = [NumberPlateExtractorProxy extractFrom:loadedImage];
+    // TEST: write and read
+//    std::vector<uchar> array;
+//    if (grayImage.isContinuous()) {
+//        array.assign(grayImage.datastart, grayImage.dataend);
+//    }
+//    for (int i = 100 * image.cols; i < 140 * image.cols; i++) {
+//        array[i] = 0;
+//    }
+//    cv::Mat loadedImage = cv::Mat(image.rows, image.cols, CV_8UC1);
+//    memcpy(loadedImage.data, array.data(), array.size() * sizeof(uchar));
+    // ---
+    cv::Rect numberPlateRect = [NumberPlateExtractorProxy extractFrom:grayImage];
     if (numberPlateRect.width > 0) {
-        cv::Scalar color(200, 100, 255);
-        cv::rectangle(loadedImage, numberPlateRect, color);
-        [self->vMMRecognizer recognize:loadedImage withNumberPlateRect:numberPlateRect];
+        cv::rectangle(image, numberPlateRect, cv::Scalar(200, 100, 255), 5);
+        [self->vMMRecognizer recognize:grayImage withNumberPlateRect:numberPlateRect];
     }
-    loadedImage.copyTo(image);
 }
 #endif
 

@@ -22,9 +22,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nVN-dn-5dF">
-                                <rect key="frame" x="20" y="40" width="335" height="400"/>
+                                <rect key="frame" x="20" y="40" width="335" height="500"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="400" id="YWa-VN-5JA"/>
+                                    <constraint firstAttribute="height" constant="500" id="YWa-VN-5JA"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uc9-Fm-0qn">

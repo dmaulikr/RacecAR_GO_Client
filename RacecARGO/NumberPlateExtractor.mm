@@ -8,6 +8,7 @@
 
 #import <opencv2/imgproc/imgproc.hpp>
 #import "NumberPlateExtractor.h"
+#import "ImageUtils.h"
 
 
 #define GAUSS_KERNEL_SIZE 13
@@ -31,9 +32,7 @@
     std::vector< std::vector< cv::Point > > contours;
     
     // resize
-    float ratio = src.cols / (float)src.rows;
-    int height = (int)(IMAGE_WIDTH / ratio);
-    cv::resize(src, resized, cv::Size(IMAGE_WIDTH, height));
+    [ImageUtils resize:src to:resized withWidth:IMAGE_WIDTH];
     
     // blur
     cv::Size kernelSize(GAUSS_KERNEL_SIZE, GAUSS_KERNEL_SIZE);

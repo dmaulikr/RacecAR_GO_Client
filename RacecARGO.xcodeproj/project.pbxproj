@@ -12,6 +12,7 @@
 		8F42E5E91E44D2BE00A4B98C /* NumberPlateExtractorProxy.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F42E5E81E44D2BE00A4B98C /* NumberPlateExtractorProxy.mm */; };
 		8F42E5EC1E45072000A4B98C /* RoIExtractor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F42E5EB1E45072000A4B98C /* RoIExtractor.mm */; };
 		8F42E5EF1E451E6B00A4B98C /* FeatureExtractor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F42E5EE1E451E6B00A4B98C /* FeatureExtractor.mm */; };
+		8F49ABA11E462CA3008822A2 /* ImageUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F49ABA01E462CA3008822A2 /* ImageUtils.mm */; };
 		8F5B0C6C1E420D8B0067073A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5B0C6B1E420D8B0067073A /* AppDelegate.swift */; };
 		8F5B0C6E1E420D8B0067073A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5B0C6D1E420D8B0067073A /* ViewController.swift */; };
 		8F5B0C711E420D8B0067073A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F5B0C6F1E420D8B0067073A /* Main.storyboard */; };
@@ -42,6 +43,8 @@
 		8F42E5EB1E45072000A4B98C /* RoIExtractor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RoIExtractor.mm; sourceTree = "<group>"; };
 		8F42E5ED1E451E6B00A4B98C /* FeatureExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeatureExtractor.h; sourceTree = "<group>"; };
 		8F42E5EE1E451E6B00A4B98C /* FeatureExtractor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FeatureExtractor.mm; sourceTree = "<group>"; };
+		8F49AB9F1E462CA3008822A2 /* ImageUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUtils.h; sourceTree = "<group>"; };
+		8F49ABA01E462CA3008822A2 /* ImageUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageUtils.mm; sourceTree = "<group>"; };
 		8F5B0C681E420D8B0067073A /* RacecARGO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RacecARGO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F5B0C6B1E420D8B0067073A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8F5B0C6D1E420D8B0067073A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +138,8 @@
 				8F5B0C871E421F6D0067073A /* OpenCVCameraViewController.h */,
 				8F5B0C881E421F6D0067073A /* OpenCVCameraViewController.mm */,
 				8F2A0C9B1E427CCA009FFD0D /* Const.h */,
+				8F49AB9F1E462CA3008822A2 /* ImageUtils.h */,
+				8F49ABA01E462CA3008822A2 /* ImageUtils.mm */,
 			);
 			path = RacecARGO;
 			sourceTree = "<group>";
@@ -232,6 +237,7 @@
 				8F42E5E91E44D2BE00A4B98C /* NumberPlateExtractorProxy.mm in Sources */,
 				8F2A0C961E4277C6009FFD0D /* VMMRecognizer.mm in Sources */,
 				8F2A0C9A1E427977009FFD0D /* NumberPlateExtractor.mm in Sources */,
+				8F49ABA11E462CA3008822A2 /* ImageUtils.mm in Sources */,
 				8F5B0C6E1E420D8B0067073A /* ViewController.swift in Sources */,
 				8F5B0C6C1E420D8B0067073A /* AppDelegate.swift in Sources */,
 				8F42E5EF1E451E6B00A4B98C /* FeatureExtractor.mm in Sources */,

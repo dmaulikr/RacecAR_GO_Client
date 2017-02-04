@@ -27,12 +27,12 @@
     int colStart = (int)MAX(rect.x - ROI_LEFT_FACTOR * w, 0);
     int colEnd   = (int)MIN(rect.x + w + ROI_RIGHT_FACTOR * w, src.cols - 1);
     
-    cv::Mat submat = cv::Mat(src, cv::Range(rowStart, rowEnd), cv::Range(colStart, colEnd));
+    cv::Mat submat = src(cv::Range(rowStart, rowEnd), cv::Range(colStart, colEnd));
     
     // delete content of number plate
     cv::Point p(rect.x - colStart, rect.y - rowStart);
     cv::Point q(rect.x + rect.width - colStart, rect.y + rect.height - rowStart);
-    cv::rectangle(submat, p, q, cv::Scalar(0));
+    cv::rectangle(submat, p, q, cv::Scalar(0), - 1);
     
     return submat;
 }
