@@ -11,6 +11,6 @@
 
 @interface VMMRecognizer : NSObject
 
-- (void)recognize:(cv::Mat&)vehicleImage;
+- (void)recognize:(cv::Mat&)vehicleImage withNumberPlateRect:(cv::Rect&)rect;
 
 @end

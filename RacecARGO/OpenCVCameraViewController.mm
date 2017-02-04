@@ -15,11 +15,12 @@
 #import "OpenCVCameraViewController.h"
 
 #import "VMMRecognizer.h"
-#import "NumberPlateExtractor.h"        // just for testing
+#import "NumberPlateExtractorProxy.h"        // just for testing
 
 
 @interface OpenCVCameraViewController () <CvVideoCameraDelegate> {
     CvVideoCamera* videoCamera;
+    VMMRecognizer* vMMRecognizer;
 }
 
 @property CvVideoCamera* videoCamera;
@@ -41,6 +42,8 @@
     self.videoCamera.grayscaleMode = NO;
     
     self.videoCamera.delegate = self;
+    
+    self->vMMRecognizer = [[VMMRecognizer alloc] init];
 }
 
 
@@ -52,14 +55,28 @@
 
 #ifdef __cplusplus
 - (void)processImage:(cv::Mat&)image {
-    cv::cvtColor((const cv::_InputArray)image, (const cv::_OutputArray)image, CV_BGR2GRAY);
+    cv::Mat grayImage;
+    cv::cvtColor(image, grayImage, CV_BGR2GRAY);
     
-    //VMMRecognizer recognize       // TODO later
+    // write and read
+    std::vector<uchar> array;
+    if (grayImage.isContinuous()) {
+        array.assign(grayImage.datastart, grayImage.dataend);
+    }
+    for (int i = 100 * image.cols; i < 140 * image.cols; i++) {
+        array[i] = 0;
+    }
+    cv::Mat loadedImage = cv::Mat(image.rows, image.cols, CV_8UC1);
+    memcpy(loadedImage.data, array.data(), array.size() * sizeof(uchar));
     
-    // TEST: number plate extraction
-    cv::Rect numberPlateRect = [NumberPlateExtractor extract:image];
-    cv::Scalar color(0, 0, 0);
-    cv::rectangle(image, numberPlateRect, color);
+    
+    cv::Rect numberPlateRect = [NumberPlateExtractorProxy extractFrom:loadedImage];
+    if (numberPlateRect.width > 0) {
+        cv::Scalar color(200, 100, 255);
+        cv::rectangle(loadedImage, numberPlateRect, color);
+        [self->vMMRecognizer recognize:loadedImage withNumberPlateRect:numberPlateRect];
+    }
+    loadedImage.copyTo(image);
 }
 #endif
 

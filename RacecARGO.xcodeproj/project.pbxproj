@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		8F2A0C961E4277C6009FFD0D /* VMMRecognizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F2A0C951E4277C6009FFD0D /* VMMRecognizer.mm */; };
 		8F2A0C9A1E427977009FFD0D /* NumberPlateExtractor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F2A0C991E427977009FFD0D /* NumberPlateExtractor.mm */; };
+		8F42E5E91E44D2BE00A4B98C /* NumberPlateExtractorProxy.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F42E5E81E44D2BE00A4B98C /* NumberPlateExtractorProxy.mm */; };
+		8F42E5EC1E45072000A4B98C /* RoIExtractor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F42E5EB1E45072000A4B98C /* RoIExtractor.mm */; };
+		8F42E5EF1E451E6B00A4B98C /* FeatureExtractor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F42E5EE1E451E6B00A4B98C /* FeatureExtractor.mm */; };
 		8F5B0C6C1E420D8B0067073A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5B0C6B1E420D8B0067073A /* AppDelegate.swift */; };
 		8F5B0C6E1E420D8B0067073A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5B0C6D1E420D8B0067073A /* ViewController.swift */; };
 		8F5B0C711E420D8B0067073A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F5B0C6F1E420D8B0067073A /* Main.storyboard */; };
@@ -33,6 +36,12 @@
 		8F2A0C981E427977009FFD0D /* NumberPlateExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPlateExtractor.h; sourceTree = "<group>"; };
 		8F2A0C991E427977009FFD0D /* NumberPlateExtractor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NumberPlateExtractor.mm; sourceTree = "<group>"; };
 		8F2A0C9B1E427CCA009FFD0D /* Const.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Const.h; sourceTree = "<group>"; };
+		8F42E5E71E44D2BE00A4B98C /* NumberPlateExtractorProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberPlateExtractorProxy.h; sourceTree = "<group>"; };
+		8F42E5E81E44D2BE00A4B98C /* NumberPlateExtractorProxy.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NumberPlateExtractorProxy.mm; sourceTree = "<group>"; };
+		8F42E5EA1E45072000A4B98C /* RoIExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoIExtractor.h; sourceTree = "<group>"; };
+		8F42E5EB1E45072000A4B98C /* RoIExtractor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RoIExtractor.mm; sourceTree = "<group>"; };
+		8F42E5ED1E451E6B00A4B98C /* FeatureExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeatureExtractor.h; sourceTree = "<group>"; };
+		8F42E5EE1E451E6B00A4B98C /* FeatureExtractor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FeatureExtractor.mm; sourceTree = "<group>"; };
 		8F5B0C681E420D8B0067073A /* RacecARGO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RacecARGO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F5B0C6B1E420D8B0067073A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8F5B0C6D1E420D8B0067073A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +91,12 @@
 				8F2A0C951E4277C6009FFD0D /* VMMRecognizer.mm */,
 				8F2A0C981E427977009FFD0D /* NumberPlateExtractor.h */,
 				8F2A0C991E427977009FFD0D /* NumberPlateExtractor.mm */,
+				8F42E5E71E44D2BE00A4B98C /* NumberPlateExtractorProxy.h */,
+				8F42E5E81E44D2BE00A4B98C /* NumberPlateExtractorProxy.mm */,
+				8F42E5EA1E45072000A4B98C /* RoIExtractor.h */,
+				8F42E5EB1E45072000A4B98C /* RoIExtractor.mm */,
+				8F42E5ED1E451E6B00A4B98C /* FeatureExtractor.h */,
+				8F42E5EE1E451E6B00A4B98C /* FeatureExtractor.mm */,
 			);
 			name = VMMR;
 			sourceTree = "<group>";
@@ -214,12 +229,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F42E5E91E44D2BE00A4B98C /* NumberPlateExtractorProxy.mm in Sources */,
 				8F2A0C961E4277C6009FFD0D /* VMMRecognizer.mm in Sources */,
 				8F2A0C9A1E427977009FFD0D /* NumberPlateExtractor.mm in Sources */,
 				8F5B0C6E1E420D8B0067073A /* ViewController.swift in Sources */,
 				8F5B0C6C1E420D8B0067073A /* AppDelegate.swift in Sources */,
+				8F42E5EF1E451E6B00A4B98C /* FeatureExtractor.mm in Sources */,
 				8F5B0C891E421F6D0067073A /* OpenCVCameraViewController.mm in Sources */,
 				8F5B0C821E420DE40067073A /* OpenCVWrapper.mm in Sources */,
+				8F42E5EC1E45072000A4B98C /* RoIExtractor.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
