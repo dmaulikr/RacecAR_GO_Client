@@ -8,13 +8,40 @@
 
 #import "TCPSocketRequester.h"
 
+@interface TCPSocketRequester () {
+    /**
+     * Delegates by message ID
+     */
+    NSMutableDictionary<NSString*, id<TCPSocketResponseDelegate>>* delegates;
+}
+@end
+
+
+
 @implementation TCPSocketRequester
+
++ (TCPSocketRequester*)defaultRequester {
+    static TCPSocketRequester* sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[TCPSocketRequester alloc] init];
+    });
+    return sharedInstance;
+}
+
 
 - (id)init {
     if (self = [super init]) {
-        self->socket = [[TCPSocket alloc] initWithDelegate:self];
+        socket = [[TCPSocket alloc] initWithDelegate:self];
+        delegates = [NSMutableDictionary dictionary];
     }
     return self;
+}
+
+
+- (void)sendMessage:(NSData*)message withDelegate:(id<TCPSocketResponseDelegate>)delegate {
+    [delegates setValue:delegate forKey:[delegate messageId]];
+    [socket.outputStream write:[message bytes] maxLength: [message length]];
 }
 
 
@@ -29,11 +56,16 @@
         case NSStreamEventHasBytesAvailable:
             NSLog(@"HasBytesAvailable");
             uint8_t buffer[4096];
-            if (aStream == self->socket.inputStream) {
+            if (aStream == socket.inputStream) {
                 NSInputStream* stream = self->socket.inputStream;
                 while (stream.hasBytesAvailable) {
                     NSInteger len = [stream read:buffer maxLength:sizeof(buffer)];
                     if (len > 0) {
+                        // read message ID (first byte)
+                        
+                        // inform delegates with that ID
+                        
+                        
                         NSString* output = [[NSString alloc] initWithBytes:buffer length:len encoding:NSASCIIStringEncoding];
                         if (output != nil) {
                             NSLog(@"server said: %@", output);

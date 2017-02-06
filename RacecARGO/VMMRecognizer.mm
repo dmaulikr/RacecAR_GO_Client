@@ -14,9 +14,7 @@
 #import "TCPSocketRequester.h"
 
 
-@interface VMMRecognizer () {
-    TCPSocketRequester* socketRequester;
-}
+@interface VMMRecognizer ()
 @end
 
 
@@ -24,7 +22,7 @@
 
 - (id)init {
     if (self = [super init]) {
-        self->socketRequester = [[TCPSocketRequester alloc] init];
+        //
     }
     return self;
 }

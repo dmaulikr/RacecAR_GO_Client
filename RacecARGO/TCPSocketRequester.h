@@ -9,8 +9,20 @@
 #import <Foundation/Foundation.h>
 #import "TCPSocket.h"
 
+
+@protocol TCPSocketResponseDelegate
+- (void)receivedMessage:(NSData*)message;
+- (NSString*)messageId;
+@end
+
+
+
 @interface TCPSocketRequester : NSObject <NSStreamDelegate> {
     TCPSocket* socket;
 }
+
+@property (class, readonly, strong) TCPSocketRequester *defaultRequester;
+
+- (void)sendMessage:(NSData*)message withDelegate:(id<TCPSocketResponseDelegate>)delegate;
 
 @end
