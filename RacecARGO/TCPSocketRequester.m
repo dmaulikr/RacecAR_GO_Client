@@ -12,7 +12,7 @@
     /**
      * Delegates by message ID
      */
-    NSMutableDictionary<NSString*, id<TCPSocketResponseDelegate>>* delegates;
+    NSMutableDictionary<NSNumber*, id<TCPSocketResponseDelegate>>* delegates;
 }
 @end
 
@@ -40,7 +40,7 @@
 
 
 - (void)sendMessage:(NSData*)message withDelegate:(id<TCPSocketResponseDelegate>)delegate {
-    [delegates setValue:delegate forKey:[delegate messageId]];
+    [delegates setObject:delegate forKey:[delegate messageId]];
     [socket.outputStream write:[message bytes] maxLength: [message length]];
 }
 
@@ -62,14 +62,18 @@
                     NSInteger len = [stream read:buffer maxLength:sizeof(buffer)];
                     if (len > 0) {
                         // read message ID (first byte)
+                        uint8_t messageId = buffer[0];
+                        NSNumber* delegateKey = [NSNumber numberWithUnsignedChar:messageId];
+                        id<TCPSocketResponseDelegate> delegate = [delegates objectForKey:delegateKey];
                         
-                        // inform delegates with that ID
-                        
-                        
-                        NSString* output = [[NSString alloc] initWithBytes:buffer length:len encoding:NSASCIIStringEncoding];
-                        if (output != nil) {
-                            NSLog(@"server said: %@", output);
+                        // inform delegate with that ID
+                        if (delegate != nil) {
+                            [delegate receivedMessage:[NSData dataWithBytes:&buffer[1] length:len - 1]];
                         }
+//                        NSString* output = [[NSString alloc] initWithBytes:buffer length:len encoding:NSASCIIStringEncoding];
+//                        if (output != nil) {
+//                            NSLog(@"server said: %@", output);
+//                        }
                     } else {
                         NSLog(@"empty string from stream");
                     }

@@ -7,3 +7,6 @@
 //
 
 #define ROI_WIDTH 400
+
+#define MESSAGE_ID_NONE 0
+#define MESSAGE_ID_VMMR 1

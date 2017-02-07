@@ -12,7 +12,7 @@
 
 @protocol TCPSocketResponseDelegate
 - (void)receivedMessage:(NSData*)message;
-- (NSString*)messageId;
+- (NSNumber*)messageId;
 @end
 
 
