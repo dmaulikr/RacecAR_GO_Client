@@ -8,7 +8,8 @@
 
 #import "TCPSocket.h"
 
-#define ADDRESS @"95.88.122.103"
+//#define ADDRESS @"95.88.122.103"
+#define ADDRESS @"192.168.1.104"
 #define PORT 1234
 
 @implementation TCPSocket

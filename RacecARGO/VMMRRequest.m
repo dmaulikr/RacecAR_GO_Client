@@ -11,11 +11,14 @@
 @implementation VMMRRequest
 
 - (void)startWithDescriptors:(const uint8_t*)descriptors withRows:(int)rows andCols:(int)cols {
-    NSMutableData* message = [NSMutableData dataWithBytes:descriptors length:rows * cols];
+    NSMutableData* message = [NSMutableData dataWithLength:rows * cols + sizeof(rows) + sizeof(cols)];
     
     // append 4 bytes each for rows and cols
     [message appendBytes:&rows length:sizeof(rows)];
     [message appendBytes:&cols length:sizeof(cols)];
+    
+    // append data
+    [message appendBytes:descriptors length:rows * cols];
     
     [super startWithMessage:message];
 }

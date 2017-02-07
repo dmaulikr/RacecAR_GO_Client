@@ -11,10 +11,14 @@
 #import "FeatureExtractor.h"
 #import "ImageUtils.h"
 #import "Const.h"
-#import "TCPSocketRequester.h"
+#import "VMMRRequest.h"
 
 
-@interface VMMRecognizer ()
+@interface VMMRecognizer () <VMMRRequestDelegate> {
+    BOOL pending;
+    VMMRRequest* request;
+}
+- (void)resetPending;
 @end
 
 
@@ -22,7 +26,9 @@
 
 - (id)init {
     if (self = [super init]) {
-        //
+        pending = NO;
+        request = [[VMMRRequest alloc] init];
+        [NSTimer scheduledTimerWithTimeInterval:20 target:self selector:@selector(resetPending) userInfo:nil repeats:YES];
     }
     return self;
 }
@@ -49,6 +55,26 @@
         array.assign(descriptors.datastart, descriptors.dataend);
     }
     
+    // send request for make-model
+    if (!pending) {
+        pending = YES;
+        NSLog(@"sending");
+        [request startWithDescriptors:vehicleImage.datastart withRows:vehicleImage.rows andCols:vehicleImage.cols];
+        NSLog(@"sent");
+    }
+}
+
+
+- (void)resetPending {
+    pending = NO;
+}
+
+
+#pragma mark - VMMR Requester Delegate
+
+- (void)receivedMake:(NSString*)make andModel:(NSString*)model orError:(NSString*)error {
+    pending = NO;
+    NSLog(@"make: %@\nmodel: %@\nerror: %@", make, model, error);
 }
 
 @end
