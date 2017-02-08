@@ -17,15 +17,16 @@
 
 
 - (void)startWithMessage:(NSData*)message {
-//    NSMutableData* typedMessage = [NSMutableData dataWithLength:message.length + 3];
-//    uint8_t idAsByte = [self messageId].unsignedCharValue;
-//    [typedMessage appendBytes:&idAsByte length:1];
-//    [typedMessage appendBytes:message.bytes length:message.length];
-//    
-//    char* lineBreak = "\n";
-//    [typedMessage appendBytes:lineBreak length:2];
-//    
-//    [[TCPSocketRequester defaultRequester] sendMessage:typedMessage withDelegate:self];
+    NSMutableData* typedMessage = [NSMutableData dataWithCapacity:message.length + 2];
+    uint8_t idAsByte = [self messageId].unsignedCharValue;
+    [typedMessage appendBytes:&idAsByte length:1];
+    [typedMessage appendBytes:message.bytes length:message.length];
+    
+    NSString* lineBreak = @"\n";
+    const char* bytes = [lineBreak UTF8String];
+    [typedMessage appendBytes:bytes length:lineBreak.length];
+    
+    [[TCPSocketRequester defaultRequester] sendMessage:typedMessage withDelegate:self];
     
     
 //    NSString* mess = @"this is the client, hello\n";
@@ -33,18 +34,33 @@
 //    NSData* data = [NSData dataWithBytes:bytes length:mess.length];
 //    [[TCPSocketRequester defaultRequester] sendMessage:data withDelegate:self];
     
-    why does this id not reach the server right? better send a char like 'a' and read this in server.
-    don't forget to use UTF8String to encode
+//    NSMutableData* typedMessage = [NSMutableData dataWithCapacity:8];
+//    uint8_t idAsByte = [self messageId].unsignedCharValue;
+//    [typedMessage appendBytes:&idAsByte length:1];
+//    
+//    uint8_t v200 = 200;
+//    [typedMessage appendBytes:&v200 length:1];
+//    
+//    SignedByte v15 = 15;
+//    [typedMessage appendBytes:&v15 length:1];
+//    
+//    char vm = 'm';
+//    [typedMessage appendBytes:&vm length:1];
+//    
+//    NSString* vs = @"Joh";
+//    const char* vss = [vs UTF8String];
+//    [typedMessage appendBytes:vss length:3];
     
-    NSMutableData* typedMessage = [NSMutableData dataWithLength:3];
-    uint8_t idAsByte = [self messageId].unsignedCharValue;
-    [typedMessage appendBytes:&idAsByte length:1];
+//    NSString* mid = @"a";
+//    const char* midc = [mid UTF8String];
+//    [typedMessage appendBytes:midc length:mid.length];
     
-    NSString* lineBreak = @"\n";
-    const char* bytes = [lineBreak UTF8String];
-    [typedMessage appendBytes:bytes length:lineBreak.length];
-    
-    [[TCPSocketRequester defaultRequester] sendMessage:typedMessage withDelegate:self];
+//    NSString* lineBreak = @"\n";
+//    NSLog(@"len: %lu", (unsigned long)lineBreak.length);
+//    const char* bytes = [lineBreak UTF8String];
+//    [typedMessage appendBytes:bytes length:lineBreak.length];
+//    
+//    [[TCPSocketRequester defaultRequester] sendMessage:typedMessage withDelegate:self];
 }
 
 

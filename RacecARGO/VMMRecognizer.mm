@@ -28,7 +28,7 @@
     if (self = [super init]) {
         pending = NO;
         request = [[VMMRRequest alloc] init];
-        [NSTimer scheduledTimerWithTimeInterval:20 target:self selector:@selector(resetPending) userInfo:nil repeats:YES];
+        [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(resetPending) userInfo:nil repeats:YES];
     }
     return self;
 }
@@ -40,7 +40,9 @@
     
     // normalize RoI
     cv::equalizeHist(roI, roI);
-    [ImageUtils resize:roI to:roI withWidth:ROI_WIDTH];
+    //[ImageUtils resize:roI to:roI withWidth:ROI_WIDTH];
+    // TODO DEBUG
+    [ImageUtils resize:roI to:roI withWidth:200];
     
     
     // TODO: Make a test: Compute descriptors for the same image with JAVA and
@@ -59,7 +61,7 @@
     if (!pending) {
         pending = YES;
         NSLog(@"sending");
-        [request startWithDescriptors:vehicleImage.datastart withRows:vehicleImage.rows andCols:vehicleImage.cols];
+        [request startWithDescriptors:roI.datastart withRows:roI.rows andCols:roI.cols];
         NSLog(@"sent");
     }
 }
