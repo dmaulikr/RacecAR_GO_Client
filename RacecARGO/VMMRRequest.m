@@ -17,19 +17,16 @@
 }
 
 
-- (void)startWithDescriptors:(const uint8_t*)descriptors withRows:(int)rows andCols:(int)cols {
-    // TODO DEBUG
-    NSMutableData* message = [NSMutableData dataWithCapacity:rows * cols /*+ sizeof(rows) + sizeof(cols)*/];
+- (void)startWithDescriptors:(const uint8_t*)descriptors withRows:(uint16_t)rows andCols:(uint16_t)cols {
+    NSMutableData* message = [NSMutableData dataWithCapacity:rows * cols + sizeof(rows) + sizeof(cols)];
     
-    so wird zumindest manchmal das korrekte Bild übertragen. Warum nicht immer?
-    Ist die gesendete Größe konstant? Da ja der Server von einer konstanten ausgeht.
-    Sind vllt noch Reste im InputStream übrig, die beim nächsten Mal mitgelesen werden?
-    Gesendete roi auch mal auf dem Device anzeigen
     
-    // TODO DEBUG
-    // append 4 bytes each for rows and cols
-//    [message appendBytes:&rows length:sizeof(rows)];
-//    [message appendBytes:&cols length:sizeof(cols)];
+    
+    // append number of rows and cols
+    [message appendBytes:&rows length:sizeof(rows)];
+    [message appendBytes:&cols length:sizeof(cols)];
+    
+    NSLog(@"sent (rows: %d, cols: %d)", rows, cols);
     
     // append data
     [message appendBytes:descriptors length:rows * cols];

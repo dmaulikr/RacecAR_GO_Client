@@ -18,6 +18,6 @@
 
 @interface VMMRRequest : TCPRequest
 
-- (void)startWithDescriptors:(const uint8_t*)descriptors withRows:(int)rows andCols:(int)cols;
+- (void)startWithDescriptors:(const uint8_t*)descriptors withRows:(uint16_t)rows andCols:(uint16_t)cols;
 
 @end
