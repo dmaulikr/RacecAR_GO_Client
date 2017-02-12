@@ -13,6 +13,7 @@
 }
 
 - (IBAction)start:(id)sender;
-- (IBAction)stop:(id)stop;
+- (IBAction)stop:(id)sender;
+- (IBAction)capture:(id)sender;
 
 @end
