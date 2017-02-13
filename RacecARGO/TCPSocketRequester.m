@@ -18,7 +18,7 @@
     
     uint8_t messageBuffer[4096];
     NSInteger currentMessageLength;
-    uint8_t expectedMessageLength;
+    uint16_t expectedMessageLength;
 }
 - (void)parseBuffer:(uint8_t*)buffer withLength:(NSInteger)length;
 @end
@@ -41,8 +41,8 @@
     if (self = [super init]) {
         socket = [[TCPSocket alloc] initWithDelegate:self];
         delegates = [NSMutableDictionary dictionary];
-        bufferLength = 0;
-        expectedLength = 0;
+        currentMessageLength = 0;
+        expectedMessageLength = 0;
     }
     return self;
 }
@@ -76,17 +76,28 @@
                     uint8_t buffer[4096];
                     NSInteger len = [stream read:buffer maxLength:sizeof(buffer)];
                     if (len > 0) {
+                        uint8_t* bufferPtr;
                         if (currentMessageLength == 0) {
-                            // currentMessageLength == 0 means a new message arrives, so read its real length
-                            expectedMessageLength = buffer[0] - CHAR_0;
+                            // currentMessageLength == 0 means new message arrives, so read its real length
+                            expectedMessageLength = (uint16_t)(buffer[0] << 8 | buffer[1]);
+                            // skip first two bytes which contain expected length
+                            bufferPtr = &buffer[2];
+                            len -= 2;
                         } else {
-                            // add buffer to stored buffer at position currentLength
-                            // currentLength += len
-                            // if currentLength == expectedLength start to parse and reset values
+                            bufferPtr = buffer;
+                        }
+                        // add buffer to stored buffer at position currentLength
+                        if (len > 0) {
+                            memcpy(&messageBuffer[currentMessageLength], bufferPtr, len);
+                            currentMessageLength += len;
                         }
                         
-                        
-                        [self parseBuffer:buffer withLength:len];
+                        // parse message if it is complete
+                        if (currentMessageLength == expectedMessageLength) {
+                            [self parseBuffer:messageBuffer withLength:currentMessageLength];
+                            currentMessageLength = 0;
+                            expectedMessageLength = 0;
+                        }
                     } else {
                         NSLog(@"empty string from stream");
                     }
@@ -117,8 +128,6 @@
     if (delegate != nil) {
         [delegate receivedMessage:[NSData dataWithBytes:&buffer[1] length:length - 1]];
     }
-    
-    bufferLength = 0;
 //    NSString* output = [[NSString alloc] initWithBytes:buffer length:len encoding:NSASCIIStringEncoding];
 //    if (output != nil) {
 //        NSLog(@"server said: %@", output);
