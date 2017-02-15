@@ -51,6 +51,13 @@
                                     <action selector="capture:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ciS-wx-q8n"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="el5-Yn-eKS">
+                                <rect key="frame" x="87" y="548" width="200" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -61,6 +68,7 @@
                     </view>
                     <connections>
                         <outlet property="imageView" destination="nVN-dn-5dF" id="qI5-uB-EsK"/>
+                        <outlet property="makeModelLabel" destination="el5-Yn-eKS" id="Bsl-3p-g7g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

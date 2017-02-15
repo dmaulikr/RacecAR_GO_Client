@@ -24,8 +24,11 @@
 
 @implementation VMMRecognizer
 
-- (id)init {
+@synthesize delegate;
+
+- (id)initWithDelegate:(id<VMMRecognizerDelegate>)aDelegate {
     if (self = [super init]) {
+        [self setDelegate:aDelegate];
         pending = NO;
         request = [[VMMRRequest alloc] init];
         request.delegate = self;
@@ -79,6 +82,9 @@
 - (void)receivedMake:(NSString*)make andModel:(NSString*)model orError:(NSString*)error {
     pending = NO;
     NSLog(@"make: %@\nmodel: %@\nerror: %@", make, model, error);
+    if (delegate != nil) {
+        [delegate recognizedMake:make andModel:model];
+    }
 }
 
 @end

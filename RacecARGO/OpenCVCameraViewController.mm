@@ -19,7 +19,7 @@
 #import "TCPSocketRequester.h"
 
 
-@interface OpenCVCameraViewController () <CvVideoCameraDelegate> {
+@interface OpenCVCameraViewController () <CvVideoCameraDelegate, VMMRecognizerDelegate> {
     CvVideoCamera* videoCamera;
     VMMRecognizer* vMMRecognizer;
     cv::Mat cropped;
@@ -45,7 +45,7 @@
     
     self.videoCamera.delegate = self;
     
-    self->vMMRecognizer = [[VMMRecognizer alloc] init];
+    self->vMMRecognizer = [[VMMRecognizer alloc] initWithDelegate:self];
     
     // TODO DEBUG initialize requester here to build up TCP connection
     [TCPSocketRequester defaultRequester];
@@ -109,6 +109,12 @@
     }
 }
 
+
+#pragma mark - VMMRecognitionDelegate
+
+- (void)recognizedMake:(NSString*)make andModel:(NSString*)model {
+    makeModelLabel.text = [NSString stringWithFormat:@"%@ %@", make, model];
+}
 
 /*
 #pragma mark - Navigation

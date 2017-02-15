@@ -75,26 +75,22 @@
                     // messages don't always arrive in one piece
                     uint8_t buffer[4096];
                     NSInteger len = [stream read:buffer maxLength:sizeof(buffer)];
+                    NSLog(@"length: %ld", len);
                     if (len > 0) {
-                        uint8_t* bufferPtr;
-                        if (currentMessageLength == 0) {
-                            // currentMessageLength == 0 means new message arrives, so read its real length
-                            expectedMessageLength = (uint16_t)(buffer[0] << 8 | buffer[1]);
-                            // skip first two bytes which contain expected length
-                            bufferPtr = &buffer[2];
-                            len -= 2;
-                        } else {
-                            bufferPtr = buffer;
-                        }
-                        // add buffer to stored buffer at position currentLength
-                        if (len > 0) {
-                            memcpy(&messageBuffer[currentMessageLength], bufferPtr, len);
-                            currentMessageLength += len;
+                        // append read bytes to message buffer
+                        memcpy(&messageBuffer[currentMessageLength], buffer, len);
+                        currentMessageLength += len;
+                        
+                        if (expectedMessageLength == 0 && currentMessageLength >= 2) {
+                            // read length of message (2 bytes)
+                            // (not necessarily read with first package of message, if first
+                            // package is just one byte)
+                            expectedMessageLength = (uint16_t)(messageBuffer[0] << 8 | messageBuffer[1]);
                         }
                         
                         // parse message if it is complete
                         if (currentMessageLength == expectedMessageLength) {
-                            [self parseBuffer:messageBuffer withLength:currentMessageLength];
+                            [self parseBuffer:&messageBuffer[2] withLength:currentMessageLength - 2];
                             currentMessageLength = 0;
                             expectedMessageLength = 0;
                         }

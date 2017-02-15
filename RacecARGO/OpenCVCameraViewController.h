@@ -10,6 +10,7 @@
 
 @interface OpenCVCameraViewController : UIViewController {
     IBOutlet UIImageView* imageView;
+    IBOutlet UILabel* makeModelLabel;
 }
 
 - (IBAction)start:(id)sender;
