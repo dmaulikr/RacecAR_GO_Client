@@ -23,6 +23,7 @@
 
 @property (class, readonly, strong) TCPSocketRequester *defaultRequester;
 
+- (void)connectToServerWithIP:(NSString*)ipAddress;
 - (void)sendMessage:(NSData*)message withDelegate:(id<TCPSocketResponseDelegate>)delegate;
 
 @end

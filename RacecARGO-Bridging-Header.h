@@ -4,3 +4,4 @@
 
 #import "OpenCVWrapper.h"
 #import "OpenCVCameraViewController.h"
+#import "TCPSocketRequester.h"

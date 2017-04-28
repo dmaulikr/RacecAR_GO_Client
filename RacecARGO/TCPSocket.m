@@ -8,9 +8,15 @@
 
 #import "TCPSocket.h"
 
-//#define ADDRESS @"95.88.122.103"
-#define ADDRESS @"192.168.1.105"
+#define ADDRESS @"91.67.233.112"
+//#define ADDRESS @"192.168.1.101"
 #define PORT 1234
+
+@interface TCPSocket () {
+    BOOL _isCconnected;
+}
+@end
+
 
 @implementation TCPSocket
 
@@ -20,18 +26,18 @@
 - (id)initWithDelegate:(id<NSStreamDelegate>)aDelegate {
     if (self = [super init]) {
         self->delegate = aDelegate;
-        [self connect];
+        _isCconnected = NO;
     }
     return self;
 }
 
 
-- (void)connect {
-    NSLog(@"%@", @"connecting");
+- (void)connectToServerWithIPAddress:(NSString*)ipAddress {
+    NSLog(@"connecting to %@", ipAddress);
     CFReadStreamRef readStream;
     CFWriteStreamRef writeStream;
     
-    CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)ADDRESS, PORT, &readStream, &writeStream);
+    CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)ipAddress, PORT, &readStream, &writeStream);
     
     self.inputStream = (NSInputStream*)CFBridgingRelease(readStream);
     self.outputStream = (NSOutputStream*)CFBridgingRelease(writeStream);
@@ -45,6 +51,7 @@
     [self.inputStream open];
     [self.outputStream open];
     NSLog(@"%@", @"opened");
+    _isCconnected = YES;
 }
 
 
@@ -52,6 +59,12 @@
     [self->inputStream close];
     [self->outputStream close];
     NSLog(@"%@", @"closed");
+    _isCconnected = NO;
+}
+
+
+- (BOOL)isConnected {
+    return _isCconnected;
 }
 
 @end

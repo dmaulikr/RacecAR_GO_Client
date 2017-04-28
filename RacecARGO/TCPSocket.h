@@ -16,7 +16,8 @@
 @property (nonatomic, retain) NSOutputStream* outputStream;
 
 - (id)initWithDelegate:(id<NSStreamDelegate>)aDelegate;
-- (void)connect;
+- (void)connectToServerWithIPAddress:(NSString*)ipAddress;
 - (void)disconnect;
+- (BOOL)isConnected;
 
 @end

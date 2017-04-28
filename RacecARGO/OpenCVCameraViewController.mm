@@ -107,6 +107,7 @@
     if (numberPlateRect.width > 0) {
         [self->vMMRecognizer recognize:grayImage withNumberPlateRect:numberPlateRect];
     }
+    makeModelLabel.text = @"Recognizing ...";
 }
 
 

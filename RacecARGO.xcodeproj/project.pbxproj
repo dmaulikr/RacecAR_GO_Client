@@ -12,6 +12,9 @@
 		8F42E5E91E44D2BE00A4B98C /* NumberPlateExtractorProxy.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F42E5E81E44D2BE00A4B98C /* NumberPlateExtractorProxy.mm */; };
 		8F42E5EC1E45072000A4B98C /* RoIExtractor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F42E5EB1E45072000A4B98C /* RoIExtractor.mm */; };
 		8F42E5EF1E451E6B00A4B98C /* FeatureExtractor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F42E5EE1E451E6B00A4B98C /* FeatureExtractor.mm */; };
+		8F454A881EB37E46004C17EC /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F454A871EB37E46004C17EC /* MenuTableViewController.swift */; };
+		8F454A8A1EB380E6004C17EC /* GameNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F454A891EB380E6004C17EC /* GameNavigationController.swift */; };
+		8F454A8C1EB39FC8004C17EC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F454A8B1EB39FC8004C17EC /* SettingsViewController.swift */; };
 		8F49ABA11E462CA3008822A2 /* ImageUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F49ABA01E462CA3008822A2 /* ImageUtils.mm */; };
 		8F49ABAA1E466162008822A2 /* TCPSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F49ABA91E466162008822A2 /* TCPSocket.m */; };
 		8F49ABAD1E466568008822A2 /* TCPSocketRequester.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F49ABAC1E466568008822A2 /* TCPSocketRequester.m */; };
@@ -47,6 +50,9 @@
 		8F42E5EB1E45072000A4B98C /* RoIExtractor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RoIExtractor.mm; sourceTree = "<group>"; };
 		8F42E5ED1E451E6B00A4B98C /* FeatureExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeatureExtractor.h; sourceTree = "<group>"; };
 		8F42E5EE1E451E6B00A4B98C /* FeatureExtractor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FeatureExtractor.mm; sourceTree = "<group>"; };
+		8F454A871EB37E46004C17EC /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
+		8F454A891EB380E6004C17EC /* GameNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameNavigationController.swift; sourceTree = "<group>"; };
+		8F454A8B1EB39FC8004C17EC /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8F49AB9F1E462CA3008822A2 /* ImageUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUtils.h; sourceTree = "<group>"; };
 		8F49ABA01E462CA3008822A2 /* ImageUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageUtils.mm; sourceTree = "<group>"; };
 		8F49ABA81E466162008822A2 /* TCPSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPSocket.h; sourceTree = "<group>"; };
@@ -176,6 +182,9 @@
 				8F2A0C971E427949009FFD0D /* VMMR */,
 				8F5B0C6B1E420D8B0067073A /* AppDelegate.swift */,
 				8F5B0C6D1E420D8B0067073A /* ViewController.swift */,
+				8F454A871EB37E46004C17EC /* MenuTableViewController.swift */,
+				8F454A891EB380E6004C17EC /* GameNavigationController.swift */,
+				8F454A8B1EB39FC8004C17EC /* SettingsViewController.swift */,
 				8F5B0C6F1E420D8B0067073A /* Main.storyboard */,
 				8F5B0C721E420D8B0067073A /* Assets.xcassets */,
 				8F5B0C741E420D8B0067073A /* LaunchScreen.storyboard */,
@@ -280,14 +289,17 @@
 			files = (
 				8F42E5E91E44D2BE00A4B98C /* NumberPlateExtractorProxy.mm in Sources */,
 				8F528D191E4A14510059A89A /* TCPRequest.m in Sources */,
+				8F454A881EB37E46004C17EC /* MenuTableViewController.swift in Sources */,
 				8F2A0C961E4277C6009FFD0D /* VMMRecognizer.mm in Sources */,
 				8F2A0C9A1E427977009FFD0D /* NumberPlateExtractor.mm in Sources */,
 				8F49ABA11E462CA3008822A2 /* ImageUtils.mm in Sources */,
 				8F5B0C6E1E420D8B0067073A /* ViewController.swift in Sources */,
+				8F454A8A1EB380E6004C17EC /* GameNavigationController.swift in Sources */,
 				8F5B0C6C1E420D8B0067073A /* AppDelegate.swift in Sources */,
 				8F49ABAD1E466568008822A2 /* TCPSocketRequester.m in Sources */,
 				8F49ABAA1E466162008822A2 /* TCPSocket.m in Sources */,
 				8F42E5EF1E451E6B00A4B98C /* FeatureExtractor.mm in Sources */,
+				8F454A8C1EB39FC8004C17EC /* SettingsViewController.swift in Sources */,
 				8F5B0C891E421F6D0067073A /* OpenCVCameraViewController.mm in Sources */,
 				8F5B0C821E420DE40067073A /* OpenCVWrapper.mm in Sources */,
 				8F42E5EC1E45072000A4B98C /* RoIExtractor.mm in Sources */,
