@@ -6,6 +6,7 @@
 //  Copyright © 2017 Johannes Heucher. All rights reserved.
 //
 
+
 #ifdef __cplusplus
 #import <opencv2/opencv.hpp>
 #import <opencv2/videoio/cap_ios.h>
@@ -36,6 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // camera and video
     self.videoCamera = [[CvVideoCamera alloc] initWithParentView:imageView];
     self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionBack;
     self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset1280x720;
@@ -45,7 +47,32 @@
     
     self.videoCamera.delegate = self;
     
+    
+    // scene overlay
+    NSURL* url = [[NSBundle mainBundle] URLForResource:@"Models/VW_Kaefer" withExtension:@"obj"];
+    MDLAsset* asset = [[MDLAsset alloc] initWithURL:url];
+    MDLMesh* mesh = (MDLMesh*)[asset objectAtIndex:0];
+    
+    SCNNode* cameraNode = [SCNNode node];
+    cameraNode.camera = [SCNCamera camera];
+    cameraNode.position = SCNVector3Make(0, 0, 5);
+    
+    SCNScene* scene = [[SCNScene alloc] init];
+    SCNNode* node = [SCNNode nodeWithMDLObject:mesh];
+    
+    [scene.rootNode addChildNode:cameraNode];
+    [scene.rootNode addChildNode:node];
+    
+    sceneView.autoenablesDefaultLighting = YES;
+    sceneView.allowsCameraControl = YES;
+    sceneView.scene = scene;
+    sceneView.backgroundColor = [UIColor clearColor];
+    
+    
+    // recognition
     self->vMMRecognizer = [[VMMRecognizer alloc] initWithDelegate:self];
+    
+    
     
     // TODO DEBUG initialize requester here to build up TCP connection
     [TCPSocketRequester defaultRequester];

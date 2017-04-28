@@ -41,7 +41,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nVN-dn-5dF">
-                                <rect key="frame" x="20" y="40" width="335" height="500"/>
+                                <rect key="frame" x="20" y="64" width="335" height="500"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="500" id="YWa-VN-5JA"/>
                                 </constraints>
@@ -71,16 +71,25 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="el5-Yn-eKS">
-                                <rect key="frame" x="87" y="548" width="200" height="21"/>
+                                <rect key="frame" x="87" y="538" width="200" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.49081989358174238" green="0.90918593016601634" blue="0.92852176047120416" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mEE-kX-b1h">
+                                <rect key="frame" x="20" y="64" width="335" height="500"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="500" id="vdy-oY-gQw"/>
+                                </constraints>
+                            </sceneKitView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="nVN-dn-5dF" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="POv-wm-4AO"/>
+                            <constraint firstAttribute="trailing" secondItem="mEE-kX-b1h" secondAttribute="trailing" constant="20" id="5c2-aK-ahV"/>
+                            <constraint firstItem="mEE-kX-b1h" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="F8C-rG-NZr"/>
+                            <constraint firstItem="mEE-kX-b1h" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="OsH-lh-g8x"/>
+                            <constraint firstItem="nVN-dn-5dF" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="POv-wm-4AO"/>
                             <constraint firstAttribute="trailing" secondItem="nVN-dn-5dF" secondAttribute="trailing" constant="20" id="YAn-ZF-Cja"/>
                             <constraint firstItem="nVN-dn-5dF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="yjw-Qh-E5j"/>
                         </constraints>
@@ -88,11 +97,12 @@
                     <connections>
                         <outlet property="imageView" destination="nVN-dn-5dF" id="qI5-uB-EsK"/>
                         <outlet property="makeModelLabel" destination="el5-Yn-eKS" id="Bsl-3p-g7g"/>
+                        <outlet property="sceneView" destination="mEE-kX-b1h" id="p3n-vG-pzv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1351" y="111"/>
+            <point key="canvasLocation" x="1349.5999999999999" y="110.19490254872565"/>
         </scene>
         <!--SettingsController-->
         <scene sceneID="mz9-G4-lpR">

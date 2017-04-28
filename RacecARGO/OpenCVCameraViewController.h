@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+
+#import <SceneKit/SceneKit.h>
+#import <ModelIO/ModelIO.h>
+#import <SceneKit/ModelIO.h>
+
+
 @interface OpenCVCameraViewController : UIViewController {
     IBOutlet UIImageView* imageView;
+    IBOutlet SCNView* sceneView;
     IBOutlet UILabel* makeModelLabel;
 }
 
