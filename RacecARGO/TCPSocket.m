@@ -50,7 +50,9 @@
     
     [self.inputStream open];
     [self.outputStream open];
-    NSLog(@"%@", @"opened");
+    
+    
+    NSLog(@"opened with status %lu and error %@", (unsigned long)[self.inputStream streamStatus], [self.inputStream streamError]);
     _isCconnected = YES;
 }
 

@@ -16,6 +16,11 @@
 @end
 
 
+@protocol TCPSocketStatusDelegate
+- (void)statusUpdate:(NSString*)status;
+@end
+
+
 
 @interface TCPSocketRequester : NSObject <NSStreamDelegate> {
     TCPSocket* socket;
@@ -25,5 +30,9 @@
 
 - (void)connectToServerWithIP:(NSString*)ipAddress;
 - (void)sendMessage:(NSData*)message withDelegate:(id<TCPSocketResponseDelegate>)delegate;
+- (NSStreamStatus)socketStatus;
+- (NSArray*)socketStatusDelegates;
+- (void)addSocketStatusDelegate:(id<TCPSocketStatusDelegate>)delegate;
+- (void)removeSocketStatusDelegate:(id<TCPSocketStatusDelegate>)delegate;
 
 @end

@@ -14,6 +14,7 @@
         <scene sceneID="kG3-Y5-qN4">
             <objects>
                 <navigationController id="yT2-WP-c5d" customClass="GameNavigationController" customModule="RacecARGO" customModuleProvider="target" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="4bx-q7-AAX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -28,10 +29,10 @@
             </objects>
             <point key="canvasLocation" x="353" y="111"/>
         </scene>
-        <!--OpenCV Camera View Controller-->
+        <!--OpenCVCameraViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="OpenCVCameraViewController" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" userLabel="OpenCVCameraViewController" customClass="OpenCVCameraViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -94,6 +95,10 @@
                             <constraint firstItem="nVN-dn-5dF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="yjw-Qh-E5j"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="CAPTURING" id="aeA-yw-OUC">
+                        <barButtonItem key="rightBarButtonItem" title="status" id="lAs-E1-Wo6"/>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="imageView" destination="nVN-dn-5dF" id="qI5-uB-EsK"/>
                         <outlet property="makeModelLabel" destination="el5-Yn-eKS" id="Bsl-3p-g7g"/>
@@ -210,7 +215,10 @@
                             <outlet property="delegate" destination="hUJ-FM-vX2" id="OPf-Pq-Xi0"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="wTG-ud-VdA"/>
+                    <navigationItem key="navigationItem" title="SETTINGS" id="wTG-ud-VdA">
+                        <barButtonItem key="rightBarButtonItem" title="status" id="Ce2-a0-ndL"/>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="playerNameInput" destination="Hwg-7N-yF9" id="m59-U0-Fdx"/>
                         <outlet property="serverAddressInput" destination="pQh-8f-ueR" id="Xzv-K2-8rP"/>
@@ -235,7 +243,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Wph-hY-xHl" id="oW8-B8-68V">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Capturing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cSG-CO-atx">
@@ -256,7 +264,7 @@
                                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8TI-7n-VMe" id="6hF-oF-vSB">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZY-L2-cUd">

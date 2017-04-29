@@ -12,9 +12,14 @@
 
 @interface TCPSocketRequester () {
     /**
-     * Delegates by message ID
+     * Status delegates
      */
-    NSMutableDictionary<NSNumber*, id<TCPSocketResponseDelegate>>* delegates;
+    NSMutableArray<id<TCPSocketStatusDelegate>>* statusDelegates;
+    
+    /**
+     * Message delegates by message ID
+     */
+    NSMutableDictionary<NSNumber*, id<TCPSocketResponseDelegate>>* messageDelegates;
     
     uint8_t messageBuffer[4096];
     NSInteger currentMessageLength;
@@ -47,9 +52,13 @@
         if (address != nil && address.length > 0) {
             [self connectToServerWithIP:address];
         }
-        delegates = [NSMutableDictionary dictionary];
+        statusDelegates = [NSMutableArray array];
+        messageDelegates = [NSMutableDictionary dictionary];
         currentMessageLength = 0;
         expectedMessageLength = 0;
+        
+        // start timer to check socket status regularly
+        [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(socketStatusTimerDidFire) userInfo:nil repeats:YES];
     }
     return self;
 }
@@ -63,9 +72,69 @@
 }
 
 
+#pragma mark - Socket Status
+
+- (NSArray*)socketStatusDelegates {
+    return self->statusDelegates;
+}
+
+
+- (void)addSocketStatusDelegate:(id<TCPSocketStatusDelegate>)delegate {
+    [self->statusDelegates addObject:delegate];
+}
+
+
+- (void)removeSocketStatusDelegate:(id<TCPSocketStatusDelegate>)delegate {
+    [self->statusDelegates removeObject:delegate];
+}
+
+
+- (NSStreamStatus)socketStatus {
+    return socket.inputStream.streamStatus;
+}
+
+
+- (void)socketStatusTimerDidFire {
+    NSString* statusMessage;
+    switch ([TCPSocketRequester defaultRequester].socketStatus) {
+        case NSStreamStatusNotOpen:
+            statusMessage = @"not open";
+            break;
+        case NSStreamStatusOpening:
+            statusMessage = @"opening";
+            break;
+        case NSStreamStatusOpen:
+            statusMessage = @"open";
+            break;
+        case NSStreamStatusReading:
+            statusMessage = @"reading";
+            break;
+        case NSStreamStatusWriting:
+            statusMessage = @"writing";
+            break;
+        case NSStreamStatusAtEnd:
+            statusMessage = @"at end";
+            break;
+        case NSStreamStatusClosed:
+            statusMessage = @"closed";
+            break;
+        case NSStreamStatusError:
+            statusMessage = @"error";
+            break;
+        default:
+            statusMessage = @"no valid status";
+    }
+    for (id<TCPSocketStatusDelegate> delegate in statusDelegates) {
+        [delegate statusUpdate:statusMessage];
+    }
+}
+
+
+#pragma mark - Send and Receive
+
 - (void)sendMessage:(NSData*)message withDelegate:(id<TCPSocketResponseDelegate>)delegate {
     if ([socket isConnected]) {
-        [delegates setObject:delegate forKey:[delegate messageId]];
+        [messageDelegates setObject:delegate forKey:[delegate messageId]];
         [socket.outputStream write:[message bytes] maxLength: [message length]];
     } else {
         NSLog(@"ERROR: Trying to send message whereas socket is not connected!");
@@ -77,6 +146,7 @@
     switch (eventCode) {
         case NSStreamEventErrorOccurred:
             NSLog(@"ErrorOccurred");
+            NSLog(@"status %lu and error %@", (unsigned long)[socket.inputStream streamStatus], [socket.inputStream streamError]);
             break;
         case NSStreamEventEndEncountered:
             NSLog(@"EndEncountered");
@@ -137,7 +207,7 @@
     // read message ID (first byte)
     uint8_t messageId = buffer[0] - CHAR_0;
     NSNumber* delegateKey = [NSNumber numberWithUnsignedChar:messageId];
-    id<TCPSocketResponseDelegate> delegate = [delegates objectForKey:delegateKey];
+    id<TCPSocketResponseDelegate> delegate = [messageDelegates objectForKey:delegateKey];
     
     // inform delegate with that ID
     if (delegate != nil) {

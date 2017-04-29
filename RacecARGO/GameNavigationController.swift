@@ -11,7 +11,6 @@ import UIKit;
 
 
 class GameNavigationController: UINavigationController {
-    
 }
 
 

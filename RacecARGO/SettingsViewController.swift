@@ -52,3 +52,23 @@ class SettingsViewController: UITableViewController {
         defaults.setValue(address, forKey: SERVER_ADDRESS_KEY)
     }
 }
+
+
+
+extension SettingsViewController: TCPSocketStatusDelegate {
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        TCPSocketRequester.defaultRequester().addSocketStatusDelegate(self)
+    }
+    
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        TCPSocketRequester.defaultRequester().removeSocketStatusDelegate(self)
+    }
+    
+    
+    func statusUpdate(status: String!) {
+        self.navigationItem.rightBarButtonItem?.title = status;
+    }
+}

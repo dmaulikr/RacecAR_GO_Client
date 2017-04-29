@@ -20,7 +20,7 @@
 #import "TCPSocketRequester.h"
 
 
-@interface OpenCVCameraViewController () <CvVideoCameraDelegate, VMMRecognizerDelegate> {
+@interface OpenCVCameraViewController () <CvVideoCameraDelegate, VMMRecognizerDelegate, TCPSocketStatusDelegate> {
     CvVideoCamera* videoCamera;
     VMMRecognizer* vMMRecognizer;
     cv::Mat cropped;
@@ -76,12 +76,6 @@
     
     // TODO DEBUG initialize requester here to build up TCP connection
     [TCPSocketRequester defaultRequester];
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
@@ -144,14 +138,22 @@
     makeModelLabel.text = [NSString stringWithFormat:@"%@ %@", make, model];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - Socket Status
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [[TCPSocketRequester defaultRequester] addSocketStatusDelegate:self];
 }
-*/
+
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [[TCPSocketRequester defaultRequester] removeSocketStatusDelegate:self];
+}
+
+- (void)statusUpdate:(NSString*)status {
+    self.navigationItem.rightBarButtonItem.title = status;
+}
 
 @end
