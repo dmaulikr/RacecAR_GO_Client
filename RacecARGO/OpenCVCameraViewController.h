@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-
+#import <CoreMotion/CoreMotion.h>
 #import <SceneKit/SceneKit.h>
 #import <ModelIO/ModelIO.h>
 #import <SceneKit/ModelIO.h>
@@ -20,8 +20,6 @@
     IBOutlet UILabel* makeModelLabel;
 }
 
-- (IBAction)start:(id)sender;
-- (IBAction)stop:(id)sender;
 - (IBAction)capture:(id)sender;
 
 @end

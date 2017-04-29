@@ -21,6 +21,13 @@
 
 
 @interface OpenCVCameraViewController () <CvVideoCameraDelegate, VMMRecognizerDelegate, TCPSocketStatusDelegate> {
+    CMMotionManager* motionManager;
+    CMAttitude* initialAttitude;            // attitude at time of capturing
+    
+    SCNScene* scene;
+    SCNNode* cameraNode;
+    SCNNode* modelNode;
+    
     CvVideoCamera* videoCamera;
     VMMRecognizer* vMMRecognizer;
     cv::Mat cropped;
@@ -40,6 +47,7 @@
     // camera and video
     self.videoCamera = [[CvVideoCamera alloc] initWithParentView:imageView];
     self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionBack;
+    //self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset1920x1080;
     self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset1280x720;
     self.videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
     self.videoCamera.defaultFPS = 30;
@@ -49,19 +57,12 @@
     
     
     // scene overlay
-    NSURL* url = [[NSBundle mainBundle] URLForResource:@"Models/VW_Kaefer" withExtension:@"obj"];
-    MDLAsset* asset = [[MDLAsset alloc] initWithURL:url];
-    MDLMesh* mesh = (MDLMesh*)[asset objectAtIndex:0];
-    
-    SCNNode* cameraNode = [SCNNode node];
+    cameraNode = [SCNNode node];
     cameraNode.camera = [SCNCamera camera];
-    cameraNode.position = SCNVector3Make(0, 0, 5);
+    cameraNode.position = SCNVector3Make(0, 1, 3.5f);
     
-    SCNScene* scene = [[SCNScene alloc] init];
-    SCNNode* node = [SCNNode nodeWithMDLObject:mesh];
-    
+    scene = [[SCNScene alloc] init];
     [scene.rootNode addChildNode:cameraNode];
-    [scene.rootNode addChildNode:node];
     
     sceneView.autoenablesDefaultLighting = YES;
     sceneView.allowsCameraControl = YES;
@@ -79,12 +80,55 @@
 }
 
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    // receive socket status
+    [[TCPSocketRequester defaultRequester] addSocketStatusDelegate:self];
+    
+    // start video capture
+    [self.videoCamera start];
+    
+    // start motion capture
+    motionManager = [[CMMotionManager alloc] init];
+    [motionManager setDeviceMotionUpdateInterval:0.04];
+    
+    NSOperationQueue* queue = [[NSOperationQueue alloc] init];
+    [motionManager startDeviceMotionUpdatesToQueue:queue withHandler: ^(CMDeviceMotion* motion, NSError* error) {
+        CMAttitude* attitude = motion.attitude;
+        if (initialAttitude != nil) {
+            [attitude multiplyByInverseOfAttitude:initialAttitude];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            SCNQuaternion q = SCNVector4Make(attitude.quaternion.x, attitude.quaternion.y, attitude.quaternion.z, attitude.quaternion.w);
+            cameraNode.orientation = q;
+        });
+    }];
+}
+
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    // stop receiving socket status
+    [[TCPSocketRequester defaultRequester] removeSocketStatusDelegate:self];
+    
+    // stop video capture
+    [self.videoCamera stop];
+    
+    // stop motion capture
+    [motionManager stopDeviceMotionUpdates];
+}
+
+
+
 #ifdef __cplusplus
 - (void)processImage:(cv::Mat&)image {
     // crop to fit image view
     int width  = (int)self->imageView.bounds.size.width * 2;
     int height = (int)self->imageView.bounds.size.height * 2;
-    cropped = image(cv::Rect(0, 0, width, height));
+    cropped = image(cv::Rect(0, 0, MIN(image.cols, width), height));
     cv::cvtColor(cropped, image, CV_BGR2RGB);
     
     // TODO DEBUG as long as the real number plate recognition is bad, use proxy
@@ -94,16 +138,6 @@
     }
 }
 #endif
-
-
-- (IBAction)start:(id)sender {
-    [self.videoCamera start];
-}
-
-
-- (IBAction)stop:(id)sender {
-    [self.videoCamera stop];
-}
 
 
 - (IBAction)capture:(id)sender {
@@ -129,6 +163,9 @@
         [self->vMMRecognizer recognize:grayImage withNumberPlateRect:numberPlateRect];
     }
     makeModelLabel.text = @"Recognizing ...";
+    
+    // save attitude at time of capture, because this will be the identity in capturing space
+    initialAttitude = motionManager.deviceMotion.attitude;
 }
 
 
@@ -136,21 +173,23 @@
 
 - (void)recognizedMake:(NSString*)make andModel:(NSString*)model {
     makeModelLabel.text = [NSString stringWithFormat:@"%@ %@", make, model];
+    
+    // remove current model node
+    if (modelNode != nil) {
+        [modelNode removeFromParentNode];
+    }
+    
+    // load and show respective model
+    NSString* filename = [NSString stringWithFormat:@"Models/%@_%@", make, model];
+    NSURL* url = [[NSBundle mainBundle] URLForResource:filename withExtension:@"obj"];
+    MDLAsset* asset = [[MDLAsset alloc] initWithURL:url];
+    MDLMesh* mesh = (MDLMesh*)[asset objectAtIndex:0];
+    modelNode = [SCNNode nodeWithMDLObject:mesh];
+    [scene.rootNode addChildNode:modelNode];
 }
 
 
 #pragma mark - Socket Status
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [[TCPSocketRequester defaultRequester] addSocketStatusDelegate:self];
-}
-
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    [[TCPSocketRequester defaultRequester] removeSocketStatusDelegate:self];
-}
 
 - (void)statusUpdate:(NSString*)status {
     self.navigationItem.rightBarButtonItem.title = status;
