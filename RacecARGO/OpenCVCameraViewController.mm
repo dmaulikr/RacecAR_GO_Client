@@ -59,7 +59,7 @@
     // scene overlay
     cameraNode = [SCNNode node];
     cameraNode.camera = [SCNCamera camera];
-    cameraNode.position = SCNVector3Make(0, 1, 3.5f);
+    cameraNode.position = SCNVector3Make(0, 1, 4);
     
     scene = [[SCNScene alloc] init];
     [scene.rootNode addChildNode:cameraNode];
