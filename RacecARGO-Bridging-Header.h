@@ -4,4 +4,6 @@
 
 #import "OpenCVWrapper.h"
 #import "OpenCVCameraViewController.h"
+#import "Const.h"
 #import "TCPSocketRequester.h"
+#import "PlayerNameRequest.h"

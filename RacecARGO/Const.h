@@ -10,3 +10,5 @@
 
 #define MESSAGE_ID_NONE 0
 #define MESSAGE_ID_VMMR 1
+#define MESSAGE_ID_PLAYER_NAME 2
+#define MESSAGE_ID_GPS 3

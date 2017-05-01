@@ -11,6 +11,10 @@ import UIKit;
 
 
 class GameNavigationController: UINavigationController {
+    override func viewDidLoad() {
+        // start location tracking
+        _ = LocationController()
+    }
 }
 
 

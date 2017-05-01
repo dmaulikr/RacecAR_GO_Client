@@ -18,6 +18,7 @@
 
 @protocol TCPSocketStatusDelegate
 - (void)statusUpdate:(NSString*)status;
+- (void)didOpen;
 @end
 
 

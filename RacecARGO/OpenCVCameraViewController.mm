@@ -59,7 +59,7 @@
     // scene overlay
     cameraNode = [SCNNode node];
     cameraNode.camera = [SCNCamera camera];
-    cameraNode.position = SCNVector3Make(0, 1, 4);
+    cameraNode.position = SCNVector3Make(0, 0.7f, 4.5f);
     
     scene = [[SCNScene alloc] init];
     [scene.rootNode addChildNode:cameraNode];
@@ -193,6 +193,10 @@
 
 - (void)statusUpdate:(NSString*)status {
     self.navigationItem.rightBarButtonItem.title = status;
+}
+
+
+- (void)didOpen {
 }
 
 @end

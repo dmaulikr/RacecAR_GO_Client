@@ -27,13 +27,28 @@ class SettingsViewController: UITableViewController {
         if let serverAddress = defaults.stringForKey(SERVER_ADDRESS_KEY) {
             serverAddressInput?.text = serverAddress
         }
+        
+        connect()
     }
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 2 {
-            let address = serverAddressInput?.text
+            connect()
+        }
+    }
+    
+    
+    func connect() {
+        if let address = serverAddressInput?.text, playerName = playerNameInput?.text where address.characters.count > 0 && playerName.characters.count > 0 {
             TCPSocketRequester.defaultRequester().connectToServerWithIP(address)
+        } else {
+            let alert = UIAlertController(title: "Unable to connect", message: "First type in a valid player name and a server address.", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "OK", style: .Default, handler: { action in
+                alert.dismissViewControllerAnimated(true, completion: nil)
+            })
+            alert.addAction(okAction)
+            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
     
@@ -70,5 +85,17 @@ extension SettingsViewController: TCPSocketStatusDelegate {
     
     func statusUpdate(status: String!) {
         self.navigationItem.rightBarButtonItem?.title = status;
+    }
+    
+    
+    func didOpen() {
+        // wait a little before sending name. Does not send otherwise
+        NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(SettingsViewController.sendPlayerName), userInfo: nil, repeats: false)
+    }
+    
+    
+    func sendPlayerName() {
+        let playerNameRequest = PlayerNameRequest()
+        playerNameRequest.startWithName(playerNameInput?.text)
     }
 }

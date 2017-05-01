@@ -45,13 +45,6 @@
 - (id)init {
     if (self = [super init]) {
         socket = [[TCPSocket alloc] initWithDelegate:self];
-        
-        // connect to IP address stored in user defaults
-        NSString* address = [[NSUserDefaults standardUserDefaults] stringForKey:@"SERVER_ADDRESS"];
-        
-        if (address != nil && address.length > 0) {
-            [self connectToServerWithIP:address];
-        }
         statusDelegates = [NSMutableArray array];
         messageDelegates = [NSMutableDictionary dictionary];
         currentMessageLength = 0;
@@ -134,7 +127,9 @@
 
 - (void)sendMessage:(NSData*)message withDelegate:(id<TCPSocketResponseDelegate>)delegate {
     if ([socket isConnected]) {
-        [messageDelegates setObject:delegate forKey:[delegate messageId]];
+        if (delegate != nil) {
+            [messageDelegates setObject:delegate forKey:[delegate messageId]];
+        }
         [socket.outputStream write:[message bytes] maxLength: [message length]];
     } else {
         NSLog(@"ERROR: Trying to send message whereas socket is not connected!");
@@ -191,6 +186,10 @@
             break;
         case NSStreamEventOpenCompleted:
             NSLog(@"OpenCompleted");
+            
+            for (id<TCPSocketStatusDelegate> delegate in statusDelegates) {
+                [delegate didOpen];
+            }
             break;
         case NSStreamEventHasSpaceAvailable:
             NSLog(@"HasSpaceAvailable");
