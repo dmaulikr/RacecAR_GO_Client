@@ -9,27 +9,59 @@
 import UIKit
 import CoreLocation
 
-class LocationController: NSObject {
-    var locationManager: CLLocationManager
+class LocationController: NSObject, CLLocationManagerDelegate {
+    var locationManager: CLLocationManager!
     
     override init () {
-        locationManager = CLLocationManager()
         super.init()
         
-        locationManager.delegate = self
+        locationManager = CLLocationManager()
+        locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        locationManager.delegate = self
         locationManager.startUpdatingLocation()
         
-        locationManager.requestWhenInUseAuthorization()
+//        locationManager = CLLocationManager()
+//        locationManager?.delegate = self
+//        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+//        locationManager?.distanceFilter = kCLDistanceFilterNone
+//        locationManager?.requestWhenInUseAuthorization()
+//        locationManager?.startUpdatingLocation()
     }
-}
-
-
-
-extension LocationController: CLLocationManagerDelegate {
-    @objc func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    
+//    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+//        print(error)
+//    }
+//    
+//    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        print(locations)
+//    }
+//    
+//    
+//    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+//        print(status)
+//    }
+    
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
-            NSLog("%f, %f", location.coordinate.latitude, location.coordinate.longitude)
+            print(NSString(format: "%f, %f\n", location.coordinate.latitude, location.coordinate.longitude))
         }
     }
+    
+    
+//    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+//        NSLog("%d", status.rawValue)
+//    }
 }
+
+
+
+//extension LocationController: CLLocationManagerDelegate {
+//    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        if let location = locations.last {
+//            NSLog("%f, %f", location.coordinate.latitude, location.coordinate.longitude)
+//        }
+//    }
+//}

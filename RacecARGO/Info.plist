@@ -38,5 +38,7 @@
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location tracking for evaluation purposes</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>for eval</string>
 </dict>
 </plist>
