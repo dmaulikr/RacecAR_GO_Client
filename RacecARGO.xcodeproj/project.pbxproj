@@ -42,7 +42,6 @@
 		8F5B0C971E422C3E0067073A /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F5B0C901E422C3E0067073A /* CoreVideo.framework */; };
 		8F5B0C981E422C3E0067073A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F5B0C911E422C3E0067073A /* QuartzCore.framework */; };
 		8F6AA9311EB76BA0005A56D9 /* PlayerNameRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA9301EB76BA0005A56D9 /* PlayerNameRequest.m */; };
-		8F6AA9341EB7874B005A56D9 /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA9331EB7874B005A56D9 /* LocationController.swift */; };
 		8F6AA9361EB78766005A56D9 /* LocationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6AA9351EB78766005A56D9 /* LocationRequest.swift */; };
 /* End PBXBuildFile section */
 
@@ -99,7 +98,6 @@
 		8F5B0C911E422C3E0067073A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8F6AA92F1EB76BA0005A56D9 /* PlayerNameRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerNameRequest.h; sourceTree = "<group>"; };
 		8F6AA9301EB76BA0005A56D9 /* PlayerNameRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerNameRequest.m; sourceTree = "<group>"; };
-		8F6AA9331EB7874B005A56D9 /* LocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationController.swift; sourceTree = "<group>"; };
 		8F6AA9351EB78766005A56D9 /* LocationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -157,6 +155,7 @@
 		8F49ABA51E464E3D008822A2 /* net */ = {
 			isa = PBXGroup;
 			children = (
+				8F6AA9351EB78766005A56D9 /* LocationRequest.swift */,
 				8F6AA92F1EB76BA0005A56D9 /* PlayerNameRequest.h */,
 				8F6AA9301EB76BA0005A56D9 /* PlayerNameRequest.m */,
 				8F49ABA81E466162008822A2 /* TCPSocket.h */,
@@ -202,7 +201,6 @@
 		8F5B0C6A1E420D8B0067073A /* RacecARGO */ = {
 			isa = PBXGroup;
 			children = (
-				8F6AA9321EB78728005A56D9 /* location */,
 				8F1D86091EB3F6A800E28500 /* Models */,
 				8F2A0C971E427949009FFD0D /* VMMR */,
 				8F5B0C6B1E420D8B0067073A /* AppDelegate.swift */,
@@ -239,15 +237,6 @@
 				8F5B0C911E422C3E0067073A /* QuartzCore.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		8F6AA9321EB78728005A56D9 /* location */ = {
-			isa = PBXGroup;
-			children = (
-				8F6AA9331EB7874B005A56D9 /* LocationController.swift */,
-				8F6AA9351EB78766005A56D9 /* LocationRequest.swift */,
-			);
-			name = location;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,7 +318,6 @@
 				8F42E5E91E44D2BE00A4B98C /* NumberPlateExtractorProxy.mm in Sources */,
 				8F528D191E4A14510059A89A /* TCPRequest.m in Sources */,
 				8F454A881EB37E46004C17EC /* MenuTableViewController.swift in Sources */,
-				8F6AA9341EB7874B005A56D9 /* LocationController.swift in Sources */,
 				8F2A0C961E4277C6009FFD0D /* VMMRecognizer.mm in Sources */,
 				8F2A0C9A1E427977009FFD0D /* NumberPlateExtractor.mm in Sources */,
 				8F6AA9311EB76BA0005A56D9 /* PlayerNameRequest.m in Sources */,

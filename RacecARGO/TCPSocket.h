@@ -14,6 +14,7 @@
 
 @property (nonatomic, retain) NSInputStream* inputStream;
 @property (nonatomic, retain) NSOutputStream* outputStream;
+@property BOOL isOpen;
 
 - (id)initWithDelegate:(id<NSStreamDelegate>)aDelegate;
 - (void)connectToServerWithIPAddress:(NSString*)ipAddress;

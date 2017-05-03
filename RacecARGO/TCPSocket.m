@@ -20,13 +20,14 @@
 
 @implementation TCPSocket
 
-@synthesize inputStream, outputStream;
+@synthesize inputStream, outputStream, isOpen;
 
 
 - (id)initWithDelegate:(id<NSStreamDelegate>)aDelegate {
     if (self = [super init]) {
         self->delegate = aDelegate;
         _isCconnected = NO;
+        isOpen = NO;
     }
     return self;
 }

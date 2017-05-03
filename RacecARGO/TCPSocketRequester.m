@@ -126,13 +126,13 @@
 #pragma mark - Send and Receive
 
 - (void)sendMessage:(NSData*)message withDelegate:(id<TCPSocketResponseDelegate>)delegate {
-    if ([socket isConnected]) {
+    if (socket.isOpen) {
         if (delegate != nil) {
             [messageDelegates setObject:delegate forKey:[delegate messageId]];
         }
         [socket.outputStream write:[message bytes] maxLength: [message length]];
     } else {
-        NSLog(@"ERROR: Trying to send message whereas socket is not connected!");
+        NSLog(@"ERROR: Trying to send message whereas socket is not open!");
     }
 }
 
@@ -186,6 +186,8 @@
             break;
         case NSStreamEventOpenCompleted:
             NSLog(@"OpenCompleted");
+            
+            socket.isOpen = YES;
             
             for (id<TCPSocketStatusDelegate> delegate in statusDelegates) {
                 [delegate didOpen];

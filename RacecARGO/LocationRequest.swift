@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class LocationRequest: TCPRequest {
     override func messageId() -> NSNumber! {
@@ -14,7 +15,20 @@ class LocationRequest: TCPRequest {
     }
     
     
-    func startWith(latitude latitude: float_t, andLongitude longitude: float_t) {
+    func startWith(latitude latitude: CLLocationDegrees, andLongitude longitude: CLLocationDegrees) {
+        
+        // Quirk fix: Because there has been trouble with sending Doubles, send Ints
+        let message = NSMutableData(capacity: 2 * sizeof(Int32))
+        
+        var lat: Int32 = Int32(latitude * 1e6)
+        var lon: Int32 = Int32(longitude * 1e6)
+        message?.appendBytes(&lat, length: sizeof(Int32))
+        message?.appendBytes(&lon, length: sizeof(Int32))
+        
+        //print(NSString(format: "send lat, lon: (%.4f, %.4f)", lat, lon))
+        print(NSString(format: "send lat, lon: (%d, %d)", lat, lon))
+        super.startWithMessage(message)
+        
         /*
          uint16_t length = name.length;
          NSMutableData* message = [NSMutableData dataWithCapacity:name.length + sizeof(length)];
