@@ -133,9 +133,9 @@
     
     // TODO DEBUG as long as the real number plate recognition is bad, use proxy
     cv::Rect numberPlateRect = [NumberPlateExtractorProxy extractFrom:image];
-    if (numberPlateRect.width > 0) {
-        cv::rectangle(image, numberPlateRect, cv::Scalar(200, 100, 255), 5);
-    }
+//    if (numberPlateRect.width > 0) {
+//        cv::rectangle(image, numberPlateRect, cv::Scalar(200, 100, 255), 5);
+//    }
 }
 #endif
 

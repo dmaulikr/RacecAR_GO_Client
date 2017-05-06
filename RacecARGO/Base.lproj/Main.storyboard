@@ -15,7 +15,7 @@
             <objects>
                 <navigationController id="yT2-WP-c5d" customClass="GameNavigationController" customModule="RacecARGO" customModuleProvider="target" sceneMemberID="viewController">
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="4bx-q7-AAX">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="4bx-q7-AAX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -76,6 +76,13 @@
                                     <action selector="capture:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ciS-wx-q8n"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Marker" translatesAutoresizingMaskIntoConstraints="NO" id="OAt-KE-WtH">
+                                <rect key="frame" x="137" y="412" width="100" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="0dX-W6-90o"/>
+                                    <constraint firstAttribute="width" constant="100" id="ZI3-O7-QxK"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -84,6 +91,8 @@
                             <constraint firstItem="el5-Yn-eKS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="60n-mH-aRo"/>
                             <constraint firstItem="mEE-kX-b1h" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="F8C-rG-NZr"/>
                             <constraint firstAttribute="trailing" secondItem="zU7-5s-y8A" secondAttribute="trailing" id="IRM-z0-YQA"/>
+                            <constraint firstItem="OAt-KE-WtH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JIL-od-ZmJ"/>
+                            <constraint firstItem="OAt-KE-WtH" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="412" id="OK0-Xq-gCi"/>
                             <constraint firstItem="mEE-kX-b1h" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="OsH-lh-g8x"/>
                             <constraint firstItem="nVN-dn-5dF" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="POv-wm-4AO"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="zU7-5s-y8A" secondAttribute="bottom" id="Pj0-Jh-aZm"/>
@@ -194,11 +203,11 @@
                                         <rect key="frame" x="0.0" y="88" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9v0-ht-eXR" id="vQw-uZ-lPa">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Reconnect" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Onz-W2-pXO">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -328,6 +337,7 @@
     </scenes>
     <resources>
         <image name="CaptureIcon" width="50" height="50"/>
+        <image name="Marker" width="100" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="UN5-ZG-cnb"/>
