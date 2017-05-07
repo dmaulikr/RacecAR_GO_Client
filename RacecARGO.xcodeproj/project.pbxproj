@@ -21,6 +21,8 @@
 		8F49ABA11E462CA3008822A2 /* ImageUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8F49ABA01E462CA3008822A2 /* ImageUtils.mm */; };
 		8F49ABAA1E466162008822A2 /* TCPSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F49ABA91E466162008822A2 /* TCPSocket.m */; };
 		8F49ABAD1E466568008822A2 /* TCPSocketRequester.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F49ABAC1E466568008822A2 /* TCPSocketRequester.m */; };
+		8F4E07A11EBF6A6A00F08662 /* GarageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4E07A01EBF6A6900F08662 /* GarageTableViewController.swift */; };
+		8F4E07A31EBF8A6E00F08662 /* VehicleCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4E07A21EBF8A6E00F08662 /* VehicleCardViewController.swift */; };
 		8F528D191E4A14510059A89A /* TCPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F528D181E4A14510059A89A /* TCPRequest.m */; };
 		8F528D1C1E4A16380059A89A /* VMMRRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F528D1B1E4A16380059A89A /* VMMRRequest.m */; };
 		8F540B371EB4E08000591228 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F540B361EB4E08000591228 /* CoreMotion.framework */; };
@@ -72,6 +74,8 @@
 		8F49ABA91E466162008822A2 /* TCPSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPSocket.m; sourceTree = "<group>"; };
 		8F49ABAB1E466568008822A2 /* TCPSocketRequester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPSocketRequester.h; sourceTree = "<group>"; };
 		8F49ABAC1E466568008822A2 /* TCPSocketRequester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPSocketRequester.m; sourceTree = "<group>"; };
+		8F4E07A01EBF6A6900F08662 /* GarageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarageTableViewController.swift; sourceTree = "<group>"; };
+		8F4E07A21EBF8A6E00F08662 /* VehicleCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleCardViewController.swift; sourceTree = "<group>"; };
 		8F528D171E4A14510059A89A /* TCPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPRequest.h; sourceTree = "<group>"; };
 		8F528D181E4A14510059A89A /* TCPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPRequest.m; sourceTree = "<group>"; };
 		8F528D1A1E4A16380059A89A /* VMMRRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VMMRRequest.h; sourceTree = "<group>"; };
@@ -252,6 +256,8 @@
 				8F75644C1EBE40BE003C759E /* GarageController.swift */,
 				8F75644E1EBE41DD003C759E /* Vehicle.swift */,
 				8F7564501EBE45A2003C759E /* VehicleProperties.swift */,
+				8F4E07A01EBF6A6900F08662 /* GarageTableViewController.swift */,
+				8F4E07A21EBF8A6E00F08662 /* VehicleCardViewController.swift */,
 			);
 			name = garage;
 			sourceTree = "<group>";
@@ -343,7 +349,9 @@
 				8F454A8A1EB380E6004C17EC /* GameNavigationController.swift in Sources */,
 				8F6AA9361EB78766005A56D9 /* LocationRequest.swift in Sources */,
 				8F5B0C6C1E420D8B0067073A /* AppDelegate.swift in Sources */,
+				8F4E07A31EBF8A6E00F08662 /* VehicleCardViewController.swift in Sources */,
 				8F7564511EBE45A2003C759E /* VehicleProperties.swift in Sources */,
+				8F4E07A11EBF6A6A00F08662 /* GarageTableViewController.swift in Sources */,
 				8F49ABAD1E466568008822A2 /* TCPSocketRequester.m in Sources */,
 				8F49ABAA1E466162008822A2 /* TCPSocket.m in Sources */,
 				8F42E5EF1E451E6B00A4B98C /* FeatureExtractor.mm in Sources */,

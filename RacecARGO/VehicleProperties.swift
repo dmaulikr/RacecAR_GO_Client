@@ -40,6 +40,7 @@ class VehicleProperties: NSObject {
         "opel corsa d":     VehicleProperties(kW: 54, weight: 1200, emission: 2, maxSpeed: 180, maxDistance: 760, numberOfClowns: 6),
         "porsche 911":      VehicleProperties(kW: 294, weight: 1420, emission: 9, maxSpeed: 304, maxDistance: 800, numberOfClowns: 2),
         "opel mokka":       VehicleProperties(kW: 71, weight: 1410, emission: 4, maxSpeed: 190, maxDistance: 720, numberOfClowns: 4),
-        "default":          VehicleProperties(kW: 50, weight: 1310, emission: 3, maxSpeed: 174, maxDistance: 680, numberOfClowns: 3),
+        "mazda mx-5":       VehicleProperties(kW: 117, weight: 1000, emission: 5, maxSpeed: 210, maxDistance: 600, numberOfClowns: 0),
+        "default":          VehicleProperties(kW: 50, weight: 1310, emission: 3, maxSpeed: 174, maxDistance: 680, numberOfClowns: 3)
     ]
 }

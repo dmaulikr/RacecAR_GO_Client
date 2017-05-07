@@ -20,9 +20,20 @@ class MenuTableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let identifier = (indexPath.row == 0) ? "ShowCapture" : "ShowSettings"
+        let identifier: String?
+        switch indexPath.row {
+        case 0:
+            identifier = "ShowCapture"
+            break
+        case 1:
+            identifier = "ShowGarage"
+            break
+        default:
+            identifier = "ShowSettings"
+            break
+        }
         
-        if let delegate = delegate {
+        if let delegate = delegate, let identifier = identifier {
             delegate.menuItemSelected(identifier)
             
             if let gameController = delegate as? GameNavigationController {

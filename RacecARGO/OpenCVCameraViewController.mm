@@ -18,6 +18,7 @@
 #import "VMMRecognizer.h"
 #import "NumberPlateExtractorProxy.h"        // just for testing
 #import "TCPSocketRequester.h"
+#import "RacecARGO-Swift.h"
 
 
 @interface OpenCVCameraViewController () <CvVideoCameraDelegate, VMMRecognizerDelegate, TCPSocketStatusDelegate> {
@@ -31,6 +32,9 @@
     CvVideoCamera* videoCamera;
     VMMRecognizer* vMMRecognizer;
     cv::Mat cropped;
+    
+    NSString* recognizedMake;
+    NSString* recognizedModel;
 }
 
 @property CvVideoCamera* videoCamera;
@@ -105,6 +109,8 @@
             cameraNode.orientation = q;
         });
     }];
+    
+    self->storeButton.hidden = YES;
 }
 
 
@@ -169,10 +175,26 @@
 }
 
 
+- (IBAction)store:(id)sender {
+    self->storeButton.hidden = YES;
+    [[GarageController sharedInstance] addVehicleWithMake: recognizedMake andModel: recognizedModel];
+    
+    // remove current model node
+    if (modelNode != nil) {
+        [modelNode removeFromParentNode];
+        modelNode = nil;
+    }
+}
+
+
 #pragma mark - VMMRecognitionDelegate
 
 - (void)recognizedMake:(NSString*)make andModel:(NSString*)model {
     makeModelLabel.text = [NSString stringWithFormat:@"%@ %@", make, model];
+    
+    self->recognizedMake = make;
+    self->recognizedModel = model;
+    self->storeButton.hidden = NO;
     
     // remove current model node
     if (modelNode != nil) {

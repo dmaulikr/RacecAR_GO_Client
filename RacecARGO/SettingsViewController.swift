@@ -26,6 +26,9 @@ class SettingsViewController: UITableViewController {
         
         if let serverAddress = defaults.stringForKey(SERVER_ADDRESS_KEY) {
             serverAddressInput?.text = serverAddress
+        } else {
+            // insert address that is valid for 2017-05-07
+            serverAddressInput?.text = "91.67.233.112"
         }
         
         connect()

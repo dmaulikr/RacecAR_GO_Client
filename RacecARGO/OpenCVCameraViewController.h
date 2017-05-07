@@ -18,8 +18,10 @@
     IBOutlet UIImageView* imageView;
     IBOutlet SCNView* sceneView;
     IBOutlet UILabel* makeModelLabel;
+    IBOutlet UIButton* storeButton;
 }
 
 - (IBAction)capture:(id)sender;
+- (IBAction)store:(id)sender;
 
 @end
