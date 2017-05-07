@@ -10,8 +10,25 @@ import UIKit
 
 class Vehicle: NSObject {
     private var _make: String
+    var make: String {
+        get {
+            return _make
+        }
+    }
+    
     private var _model: String
+    var model: String {
+        get {
+            return _model
+        }
+    }
+    
     private var _properties: VehicleProperties
+    var properties: VehicleProperties {
+        get {
+            return _properties
+        }
+    }
     
     var makeModel: String {
         get { return _make + " " + _model }

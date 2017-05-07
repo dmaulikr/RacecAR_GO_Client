@@ -42,7 +42,9 @@ class GarageTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("vehicleCell", forIndexPath: indexPath)
         
-        cell.textLabel?.text = GarageController.sharedInstance.vehicles[indexPath.row].makeModel
+        let makeModel = GarageController.sharedInstance.vehicles[indexPath.row].makeModel
+        cell.textLabel?.text = makeModel
+        cell.imageView?.image = UIImage(named: makeModel)
         
         return cell
     }
@@ -83,15 +85,17 @@ class GarageTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if let card = segue.destinationViewController as? VehicleCardViewController {
+            if let row = tableView.indexPathForSelectedRow?.row {
+                card.vehicle = GarageController.sharedInstance.vehicles[row]
+            }
+        }
     }
-    */
 
 }
 

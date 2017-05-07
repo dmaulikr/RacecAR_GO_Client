@@ -35,9 +35,12 @@
     
     NSString* recognizedMake;
     NSString* recognizedModel;
+    BOOL pending;
 }
 
 @property CvVideoCamera* videoCamera;
+
+- (void)reset;
 
 @end
 
@@ -69,7 +72,7 @@
     [scene.rootNode addChildNode:cameraNode];
     
     sceneView.autoenablesDefaultLighting = YES;
-    sceneView.allowsCameraControl = YES;
+    sceneView.allowsCameraControl = NO;
     sceneView.scene = scene;
     sceneView.backgroundColor = [UIColor clearColor];
     
@@ -110,7 +113,7 @@
         });
     }];
     
-    self->storeButton.hidden = YES;
+    [self reset];
 }
 
 
@@ -147,49 +150,59 @@
 
 
 - (IBAction)capture:(id)sender {
-    cv::Mat grayImage;
-    
-    // turn to gray for VMMR
-    cv::cvtColor(cropped, grayImage, CV_BGR2GRAY);
-    
-    
-    // TEST: write and read
-    //    std::vector<uchar> array;
-    //    if (grayImage.isContinuous()) {
-    //        array.assign(grayImage.datastart, grayImage.dataend);
-    //    }
-    //    for (int i = 100 * image.cols; i < 140 * image.cols; i++) {
-    //        array[i] = 0;
-    //    }
-    //    cv::Mat loadedImage = cv::Mat(image.rows, image.cols, CV_8UC1);
-    //    memcpy(loadedImage.data, array.data(), array.size() * sizeof(uchar));
-    // ---
-    cv::Rect numberPlateRect = [NumberPlateExtractorProxy extractFrom:grayImage];
-    if (numberPlateRect.width > 0) {
-        [self->vMMRecognizer recognize:grayImage withNumberPlateRect:numberPlateRect];
+    if (!pending) {
+        cv::Mat grayImage;
+        
+        // turn to gray for VMMR
+        cv::cvtColor(cropped, grayImage, CV_BGR2GRAY);
+        
+        
+        // TEST: write and read
+        //    std::vector<uchar> array;
+        //    if (grayImage.isContinuous()) {
+        //        array.assign(grayImage.datastart, grayImage.dataend);
+        //    }
+        //    for (int i = 100 * image.cols; i < 140 * image.cols; i++) {
+        //        array[i] = 0;
+        //    }
+        //    cv::Mat loadedImage = cv::Mat(image.rows, image.cols, CV_8UC1);
+        //    memcpy(loadedImage.data, array.data(), array.size() * sizeof(uchar));
+        // ---
+        cv::Rect numberPlateRect = [NumberPlateExtractorProxy extractFrom:grayImage];
+        if (numberPlateRect.width > 0) {
+            [self->vMMRecognizer recognize:grayImage withNumberPlateRect:numberPlateRect];
+        }
+        makeModelLabel.text = @"Recognizing ...";
+        
+        // save attitude at time of capture, because this will be the identity in capturing space
+        initialAttitude = motionManager.deviceMotion.attitude;
+        pending = YES;
     }
-    makeModelLabel.text = @"Recognizing ...";
-    
-    // save attitude at time of capture, because this will be the identity in capturing space
-    initialAttitude = motionManager.deviceMotion.attitude;
 }
 
 
-- (IBAction)store:(id)sender {
-    self->storeButton.hidden = YES;
-    [[GarageController sharedInstance] addVehicleWithMake: recognizedMake andModel: recognizedModel];
-    
+- (void)reset {
     // remove current model node
     if (modelNode != nil) {
         [modelNode removeFromParentNode];
         modelNode = nil;
     }
+    makeModelLabel.text = @"";
+    self->storeButton.hidden = YES;
+}
+
+
+- (IBAction)store:(id)sender {
+    [[GarageController sharedInstance] addVehicleWithMake: recognizedMake andModel: recognizedModel];
+    
+    [self reset];
 }
 
 
 #pragma mark - VMMRecognitionDelegate
 
 - (void)recognizedMake:(NSString*)make andModel:(NSString*)model {
+    pending = NO;
     makeModelLabel.text = [NSString stringWithFormat:@"%@ %@", make, model];
     
     self->recognizedMake = make;
