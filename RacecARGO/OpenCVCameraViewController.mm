@@ -189,7 +189,7 @@
         modelNode = nil;
     }
     makeModelLabel.text = @"";
-    captureButton.enabled = NO;
+    captureButton.enabled = YES;
     captureButton.hidden = NO;
     storeButton.hidden = YES;
     discardButton.hidden = YES;
