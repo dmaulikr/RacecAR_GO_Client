@@ -114,6 +114,9 @@
             cameraNode.orientation = q;
         });
     }];
+    
+    // fix of menu-navigation
+    self.navigationController.viewControllers = @[self];
 }
 
 

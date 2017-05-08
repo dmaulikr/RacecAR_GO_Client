@@ -17,6 +17,16 @@ class GameNavigationController: UINavigationController {
     var locationRequest: LocationRequest?
     
     override func viewDidLoad() {
+        // start connection to server
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let playerName = defaults.stringForKey(SettingsViewController.PLAYER_NAME_KEY)
+        let serverAddress = defaults.stringForKey(SettingsViewController.SERVER_ADDRESS_KEY)
+        if let _ = playerName, let serverAddress = serverAddress {
+            TCPSocketRequester.defaultRequester().connectToServerWithIP(serverAddress)
+        } else {
+            menuItemSelected("ShowSettings")
+        }
+        
         // start location tracking
         locationManager = CLLocationManager()
         locationManager?.requestWhenInUseAuthorization()
@@ -33,8 +43,14 @@ class GameNavigationController: UINavigationController {
 
 extension GameNavigationController: MenuItemSelectedDelegate {
     func menuItemSelected(identifier: String) {
-        popViewControllerAnimated(false)
         performSegueWithIdentifier(identifier, sender: self)
+    }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
+        
+//        self.roo segue.destinationViewController
     }
 }
 

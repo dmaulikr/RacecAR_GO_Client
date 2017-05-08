@@ -23,7 +23,6 @@
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="ShowCapture" id="BOq-6X-1oN"/>
                         <segue destination="hUJ-FM-vX2" kind="show" identifier="ShowSettings" id="UN5-ZG-cnb"/>
-                        <segue destination="hUJ-FM-vX2" kind="relationship" relationship="rootViewController" id="a5r-yj-tPX"/>
                         <segue destination="aPG-Q1-BES" kind="show" identifier="ShowGarage" id="coI-FL-KOY"/>
                     </connections>
                 </navigationController>
@@ -564,7 +563,4 @@
         <image name="GarageIcon" width="42" height="50"/>
         <image name="Marker" width="100" height="19"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="UN5-ZG-cnb"/>
-    </inferredMetricsTieBreakers>
 </document>

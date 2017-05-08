@@ -105,6 +105,9 @@ extension GarageTableViewController: TCPSocketStatusDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         TCPSocketRequester.defaultRequester().addSocketStatusDelegate(self)
+        
+        // fix for menu navigation
+        navigationController?.viewControllers = [self]
     }
     
     
