@@ -84,6 +84,8 @@
     
     // TODO DEBUG initialize requester here to build up TCP connection
     [TCPSocketRequester defaultRequester];
+    
+    [self reset];
 }
 
 
@@ -112,8 +114,6 @@
             cameraNode.orientation = q;
         });
     }];
-    
-    [self reset];
 }
 
 
@@ -177,6 +177,7 @@
         // save attitude at time of capture, because this will be the identity in capturing space
         initialAttitude = motionManager.deviceMotion.attitude;
         pending = YES;
+        captureButton.enabled = NO;
     }
 }
 
@@ -188,7 +189,10 @@
         modelNode = nil;
     }
     makeModelLabel.text = @"";
-    self->storeButton.hidden = YES;
+    captureButton.enabled = NO;
+    captureButton.hidden = NO;
+    storeButton.hidden = YES;
+    discardButton.hidden = YES;
 }
 
 
@@ -199,15 +203,22 @@
 }
 
 
+- (IBAction)discard:(id)sender {
+    [self reset];
+}
+
+
 #pragma mark - VMMRecognitionDelegate
 
 - (void)recognizedMake:(NSString*)make andModel:(NSString*)model {
     pending = NO;
     makeModelLabel.text = [NSString stringWithFormat:@"%@ %@", make, model];
     
-    self->recognizedMake = make;
-    self->recognizedModel = model;
-    self->storeButton.hidden = NO;
+    recognizedMake = make;
+    recognizedModel = model;
+    captureButton.hidden = YES;
+    storeButton.hidden = NO;
+    discardButton.hidden = NO;
     
     // remove current model node
     if (modelNode != nil) {

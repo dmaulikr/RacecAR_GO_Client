@@ -18,10 +18,13 @@
     IBOutlet UIImageView* imageView;
     IBOutlet SCNView* sceneView;
     IBOutlet UILabel* makeModelLabel;
+    IBOutlet UIButton* captureButton;
     IBOutlet UIButton* storeButton;
+    IBOutlet UIButton* discardButton;
 }
 
 - (IBAction)capture:(id)sender;
 - (IBAction)store:(id)sender;
+- (IBAction)discard:(id)sender;
 
 @end
