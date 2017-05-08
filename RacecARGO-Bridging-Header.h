@@ -7,3 +7,4 @@
 #import "Const.h"
 #import "TCPSocketRequester.h"
 #import "PlayerNameRequest.h"
+#import <CoreLocation/CoreLocation.h>
