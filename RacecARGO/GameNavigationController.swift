@@ -66,7 +66,7 @@ extension GameNavigationController: CLLocationManagerDelegate {
             
             print(NSString(format: "%f, %f\n", latitude, longitude))
             
-            let MIN_STEP: CLLocationDistance = 0.0001
+            let MIN_STEP: CLLocationDistance = 0.0005
             if lastSentLocation == nil || lastSentLocation?.distanceFromLocation(location) > MIN_STEP {
                 locationRequest?.startWith(latitude: latitude, andLongitude: longitude)
                 lastSentLocation = location
