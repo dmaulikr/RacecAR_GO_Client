@@ -22,6 +22,7 @@ class GameNavigationController: UINavigationController {
         let playerName = defaults.stringForKey(SettingsViewController.PLAYER_NAME_KEY)
         let serverAddress = defaults.stringForKey(SettingsViewController.SERVER_ADDRESS_KEY)
         if let _ = playerName, let serverAddress = serverAddress {
+            TCPSocketRequester.defaultRequester().addSocketStatusDelegate(self)
             TCPSocketRequester.defaultRequester().connectToServerWithIP(serverAddress)
         } else {
             menuItemSelected("ShowSettings")
@@ -71,5 +72,25 @@ extension GameNavigationController: CLLocationManagerDelegate {
                 lastSentLocation = location
             }
         }
+    }
+}
+
+
+
+extension GameNavigationController: TCPSocketStatusDelegate {
+    func statusUpdate(status: String!) {
+        self.navigationItem.rightBarButtonItem?.title = status;
+    }
+    
+    
+    func didOpen() {
+        // wait a little before sending name. Does not send otherwise
+        NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(GameNavigationController.sendPlayerName), userInfo: nil, repeats: false)
+    }
+    
+    
+    func sendPlayerName() {
+        let playerNameRequest = PlayerNameRequest()
+        playerNameRequest.start()
     }
 }

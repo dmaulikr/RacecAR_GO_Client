@@ -104,6 +104,6 @@ extension SettingsViewController: TCPSocketStatusDelegate {
     
     func sendPlayerName() {
         let playerNameRequest = PlayerNameRequest()
-        playerNameRequest.startWithName(playerNameInput?.text)
+        playerNameRequest.start()
     }
 }

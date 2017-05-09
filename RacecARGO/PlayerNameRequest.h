@@ -12,6 +12,6 @@
 
 @interface PlayerNameRequest : TCPRequest
 
-- (void)startWithName:(NSString*)name;
+- (void)start;
 
 @end

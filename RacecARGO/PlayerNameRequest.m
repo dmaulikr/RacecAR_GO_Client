@@ -8,6 +8,7 @@
 
 #import "PlayerNameRequest.h"
 #import "Const.h"
+#import "RacecARGO-Swift.h"
 
 @implementation PlayerNameRequest
 
@@ -16,7 +17,8 @@
 }
 
 
-- (void)startWithName:(NSString*)name {
+- (void)start {
+    NSString* name = [[NSUserDefaults standardUserDefaults] stringForKey:SettingsViewController.PLAYER_NAME_KEY];
     uint16_t length = name.length;
     NSMutableData* message = [NSMutableData dataWithCapacity:name.length + sizeof(length)];
     
