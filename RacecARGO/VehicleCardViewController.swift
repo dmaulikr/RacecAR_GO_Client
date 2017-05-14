@@ -68,7 +68,8 @@ class VehicleCardViewController: UIViewController {
             
             // load and show respective model
             let filename = "Models/" + vehicle.make + "_" + vehicle.model
-            let url = NSBundle.mainBundle().URLForResource(filename, withExtension: "obj")
+            let defaultFilename = "Models/placeholder_car"
+            let url = NSBundle.mainBundle().URLForResource(filename, withExtension: "obj") ?? NSBundle.mainBundle().URLForResource(defaultFilename, withExtension: "obj")
             if let url = url {
                 let asset = MDLAsset(URL: url)
                 let mesh = asset.objectAtIndex(0)
