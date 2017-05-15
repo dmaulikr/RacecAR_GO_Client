@@ -47,11 +47,6 @@ class VehicleCardViewController: UIViewController {
         vehicleView?.allowsCameraControl = true
         vehicleView?.scene = scene
         vehicleView?.backgroundColor = UIColor.clearColor()
-    }
-    
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
         
         if let vehicle = vehicle {
             kW?.text = String(format: "%d kW", vehicle.properties.kW ?? 0)
@@ -60,7 +55,15 @@ class VehicleCardViewController: UIViewController {
             maxSpeed?.text = String(format: "%d km/h", vehicle.properties.maxSpeed ?? 0)
             maxDistance?.text = String(format: "%d km", vehicle.properties.maxDistance ?? 0)
             numberOfClowns?.text = String(format: "%d", vehicle.properties.numberOfClowns ?? 0)
-            
+        }
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+        if let vehicle = vehicle {
             // remove current model node
             if modelNode !== nil {
                 modelNode?.removeFromParentNode()

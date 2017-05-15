@@ -31,6 +31,16 @@ class SettingsViewController: UITableViewController {
             serverAddressInput?.text = "91.67.233.112"
             serverAddressEditingDidEnd()
         }
+        
+        self.view.backgroundColor = UIColor.blackColor()
+        self.tableView.backgroundColor = UIColor.blackColor()
+    }
+    
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        cell.textLabel?.textColor = UIColor.whiteColor()
+        return cell
     }
     
     

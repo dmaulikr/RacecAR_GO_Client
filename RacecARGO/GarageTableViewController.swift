@@ -13,6 +13,9 @@ class GarageTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = UIColor.blackColor()
+        self.tableView.backgroundColor = UIColor.blackColor()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -41,10 +44,14 @@ class GarageTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("vehicleCell", forIndexPath: indexPath)
+        cell.textLabel?.textColor = UIColor.whiteColor()
         
         let makeModel = GarageController.sharedInstance.vehicles[indexPath.row].makeModel
         cell.textLabel?.text = makeModel
-        cell.imageView?.image = UIImage(named: makeModel)
+        let image = UIImage(named: makeModel) ?? UIImage(named: "placeholder car")
+        if let image = image {
+            cell.imageView?.image = image
+        }
         
         return cell
     }
