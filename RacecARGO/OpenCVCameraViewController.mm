@@ -54,8 +54,12 @@
     // camera and video
     self.videoCamera = [[CvVideoCamera alloc] initWithParentView:imageView];
     self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionBack;
-    //self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset1920x1080;
-    self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset1280x720;
+    
+    if ([UIScreen mainScreen].nativeScale == 3.0) {
+        self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset1920x1080;
+    } else {
+        self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset1280x720;
+    }
     self.videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
     self.videoCamera.defaultFPS = 30;
     self.videoCamera.grayscaleMode = NO;
@@ -140,7 +144,7 @@
     // crop to fit image view
     int width  = (int)self->imageView.bounds.size.width * 2;
     int height = (int)self->imageView.bounds.size.height * 2;
-    cropped = image(cv::Rect(0, 0, MIN(image.cols, width), height));
+    cropped = image(cv::Rect(0, 0, MIN(image.cols, width), MIN(image.rows, height)));
     cv::cvtColor(cropped, image, CV_BGR2RGB);
     
     // TODO DEBUG as long as the real number plate recognition is bad, use proxy
