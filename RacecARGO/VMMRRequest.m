@@ -48,7 +48,7 @@
         if (bytes[0] == '0') {
             NSArray<NSString*>* makeModel = [payload componentsSeparatedByString:@"_"];
             make = [makeModel objectAtIndex:0];
-            model = [makeModel objectAtIndex:1];
+            model = (makeModel.count > 1) ? [makeModel objectAtIndex:1] : @"";
         } else {
             error = payload;
         }

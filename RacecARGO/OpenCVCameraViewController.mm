@@ -219,32 +219,37 @@
 
 - (void)recognizedMake:(NSString*)make andModel:(NSString*)model {
     pending = NO;
-    makeModelLabel.text = [NSString stringWithFormat:@"%@ %@", make, model];
     
-    recognizedMake = make;
-    recognizedModel = model;
-    captureButton.hidden = YES;
-    storeButton.hidden = NO;
-    discardButton.hidden = NO;
-    
-    // remove current model node
-    if (modelNode != nil) {
-        [modelNode removeFromParentNode];
+    if (make.length == 0 && model.length == 0) {
+        [self reset];
+    } else {
+        makeModelLabel.text = [NSString stringWithFormat:@"%@ %@", make, model];
+        
+        recognizedMake = make;
+        recognizedModel = model;
+        captureButton.hidden = YES;
+        storeButton.hidden = NO;
+        discardButton.hidden = NO;
+        
+        // remove current model node
+        if (modelNode != nil) {
+            [modelNode removeFromParentNode];
+        }
+        
+        // load and show respective model
+        NSString* defaultFilename = [NSString stringWithFormat:@"Models/placeholder_car"];
+        NSURL* defaultUrl = [[NSBundle mainBundle] URLForResource:defaultFilename withExtension:@"obj"];
+        
+        NSString* filename = [NSString stringWithFormat:@"Models/%@_%@", make, model];
+        NSURL* url = [[NSBundle mainBundle] URLForResource:filename withExtension:@"obj"];
+        MDLAsset* asset = [[MDLAsset alloc] initWithURL:url];
+        if ([asset count] == 0) {
+            asset = [[MDLAsset alloc] initWithURL:defaultUrl];
+        }
+        MDLMesh* mesh = (MDLMesh*)[asset objectAtIndex:0];
+        modelNode = [SCNNode nodeWithMDLObject:mesh];
+        [scene.rootNode addChildNode:modelNode];
     }
-    
-    // load and show respective model
-    NSString* defaultFilename = [NSString stringWithFormat:@"Models/placeholder_car"];
-    NSURL* defaultUrl = [[NSBundle mainBundle] URLForResource:defaultFilename withExtension:@"obj"];
-    
-    NSString* filename = [NSString stringWithFormat:@"Models/%@_%@", make, model];
-    NSURL* url = [[NSBundle mainBundle] URLForResource:filename withExtension:@"obj"];
-    MDLAsset* asset = [[MDLAsset alloc] initWithURL:url];
-    if ([asset count] == 0) {
-        asset = [[MDLAsset alloc] initWithURL:defaultUrl];
-    }
-    MDLMesh* mesh = (MDLMesh*)[asset objectAtIndex:0];
-    modelNode = [SCNNode nodeWithMDLObject:mesh];
-    [scene.rootNode addChildNode:modelNode];
 }
 
 
